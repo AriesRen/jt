@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ajax</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<button onclick="doGetJson()">queryJson()</button>
+<div id="json">
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function getAjax(){
+        if (window.XMLHttpRequest) {
+            // Opera,Safari,Mozilla,Chrome
+            return (new XMLHttpRequest());
+        }else if(window.ActiveXObject){
+            return (new ActiveXObject("Microsoft.XMLHttpRequest"));
+        }else{
+            return(null);
+        }
+    }
+
+    function doGetJson(){
+        //1、获取ajax请求对象
+        var request = getAjax();
+        //2、发送请求
+        request.onreadystatechange=function () {
+            // 设置响应处理函数
+            handleResponse(request);
+        };
+        request.open("GET", "/role/list", true);
+        request.send(null);
+
+    }
+
+    function handleResponse(request){
+        if(request.readyState===4 && request.status===200){
+
+            showDataTable(request.responseText);
+            //jsonDiv.innerHTML=request.responseText;
+        }
+    }
+
+    function showDataTable(Data) {
+        var json = JSON.parse(Data);
+        var table = "<table>";
+        for (var i in json){
+            console.log(json[i]);
+            var tr = "<tr>" +
+                "<td>"+ json[i].id + "</td>" +
+                "<td>"+ json[i].name + "</td>" +
+                "<td>"+ json[i].note + "</td>" +
+                "</tr>";
+            table += tr;
+        }
+        table += "</table>";
+        var jsonDiv = document.getElementById("json");
+        jsonDiv.innerHTML = table;
+    }
+
+</script>
+
+</body>
+</html>

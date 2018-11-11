@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroUserRealm"/>
+    </bean>
+    <bean id="shiroFilterFactoryBean" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="loginUrl" value="/loginUI"/>
+        <property name="filterChainDefinitionMap">
+            <map>
+                <entry key="/js/**" value="anon"/>
+                <entry key="/css/**" value="anon"/>
+                <entry key="/images/**" value="anon"/>
+                <entry key="/loginUI" value="anon"/>
+                <entry key="/login" value="anon"/>
+                <entry key="/logout" value="logout"/>
+                <entry key="/**" value="authc"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,140 @@
+<div class="panel panel-default panel-log">
+    <div class="panel-heading">日志列表</div>
+    <div class="panel-body" id="content">
+
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="4"></td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control search" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-search" type="button">Go!</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </td>
+                <td>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-delete">删除</button>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>ID</td>
+                <td>Username</td>
+                <td>Operation</td>
+                <td>Method</td>
+                <td>Params</td>
+                <td>IP</td>
+                <td>createdTime</td>
+            </tr>
+            </thead>
+            <tbody id="logBody">
+
+            </tbody>
+
+        </table>
+
+
+            <ul class="pager">
+                <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+                <li class="first"><a href="#">首页</a></li>
+                <li class="page"><a href="#">1</a></li>
+                <li class="page"><a href="#">2</a></li>
+                <li class="page"><a href="#">3</a></li>
+                <li class="page"><a href="#">4</a></li>
+                <li class="page"><a href="#">5</a></li>
+
+                <li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+                <li class="last"><a href="#">尾页</a></li>
+                <li class="total"><a href="#">总条数(10)</a></li>
+                <li class="pageCount"><a href="#">总页数(3)</a></li>
+                <li class="pageCurrent"><a href="#">当前页(1)</a></li>
+                <li class="pageSize"><a href="#">每页4条</a></li>
+            </ul>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var pageCount = 1; // 总页数
+    var pageCurrent = 1; // 当前页
+    var pageSize = 5;   // 每页大小
+    $(function () {
+        // 绑定事件
+        $('.pager').on('click', 'li', toPage);
+        // 请求日志
+        getPageLogs();
+        // 绑定搜索事件
+        $(".input-group").on("click", ".btn-search", doQuery);
+    });
+
+    function doQuery() {
+        getPageLogs();
+    }
+
+function getPageLogs() {
+    var url = "/logs/page";
+    var pageCurrent = $(".pager").data("pageCurrent");
+    if (!pageCurrent) pageCurrent=1;
+    var params = {"pageCurrent": pageCurrent};
+    params.username = $(".input-group >.search").val();
+    $.post(url, params, function (res) {
+        // 设置表格数组，填充到数组
+        doSetLogBody(res.records);
+        // 设置分页信息
+        doSetPage(res);
+    });
+}
+function doSetPage(res) {
+    $(".total").html("<a href=\"#\">总条数("+res.rowCount+")</a>");
+    $(".pageSize").html("<a href=\"#\">每页大小("+res.pageSize+")</a>");
+    $(".pageCount").html("<a href=\"#\">总页数("+res.pageCount+")</a>");
+    $(".pageCurrent").html("<a href=\"#\">当前页("+res.pageCurrent+")</a>");
+
+    $(".pager").data("pageCount", res.pageCount);
+    $(".pager").data("pageCurrent", res.pageCurrent);
+    $(".pager").data("pageSize", res.pageSize);
+    $(".pager").data("rowCount", res.rowCount);
+}
+function doSetLogBody(logs) {
+    var html = "";
+    $.each(logs, function (index, column) {
+        html += "<tr><td><input type='checkbox' name='checkedId' value='" + column['id'] + "'></td><td>" +
+            column['id'] + "</td><td>" +
+            column['username'] + "</td><td>" +
+            column['operation'] + "</td><td>" +
+            column['method'] + "</td><td>" +
+            column['params'] + "</td><td>" +
+            column['ip'] + "</td><td>" +
+            column['createdTime'] + "</td></tr>";
+    });
+    $('#logBody').html(html)
+}
+
+function toPage() {
+    var cls = $(this).prop("class");
+    var pageCurrent = $(".pager").data("pageCurrent");
+    var pageCount = $(".pager").data("pageCount");
+    if (cls === "first"){
+        pageCurrent = 1;
+    }else if (cls === "last"){
+        pageCurrent = pageCount;
+    }else if (cls === "previous" && pageCurrent >1) {
+        pageCurrent --;
+    }else if (cls === "next" && pageCurrent < pageCount){
+        pageCurrent ++;
+    }else if (cls === "page" && $(this).text() <= pageCount && $(this).text() >0){
+        pageCurrent = $(this).text();
+        console.log(pageCurrent)
+    }
+    $(".pager").data("pageCurrent", pageCurrent);
+    getPageLogs();
+}
+</script>
+

@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+    <div class="panel-heading">添加角色</div>
+    <div class="panel-body" id="content">
+        <form action="#" method="post" autocomplete="off">
+            <div class="form-group">
+                <label for="name">角色名称</label>
+                <input type="text" class="form-control" id="name" placeholder="角色名称">
+            </div>
+            <div class="form-group">
+                <label for="note">角色描述</label>
+                <input type="text" class="form-control" id="note" placeholder="角色描述">
+            </div>
+            <button type="button" class="btn btn-default btn-cancle">cancle</button>
+            <button type="button" class="btn btn-default btn-save">save</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("form").on("click", ".btn-cancle", doCancle)
+            .on("click", ".btn-save", doSave)
+    })
+
+    function doCancle() {
+        $('#content').load('/role/role_table');
+    }
+
+    function doSave() {
+        var name = $("#name").val();
+        var note = $("#note").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/role/addRole",
+            dataType: "json",
+            traditional: true,
+            data: {
+                name: name,
+                note: note
+            },
+            async: true,
+            success: function (data) {
+                console.log(data)
+                $('#content').load('/role/role_table');
+            },
+            error: function (e) {
+                alert("添加失败, " + e.message)
+            }
+        });
+    }
+</script>

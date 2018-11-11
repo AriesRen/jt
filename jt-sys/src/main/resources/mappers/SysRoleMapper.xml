@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.renhj.dao.SysRoleDao">
+
+    <select id="findAllRoles" resultType="sysRole">
+        select * from sys_roles
+    </select>
+
+    <select id="findRoleById" resultType="sysRole">
+        select * from sys_roles where id = #{id}
+    </select>
+
+
+    <insert id="insertRole" parameterType="sysRole">
+        insert into
+        sys_roles(name, note, createTime, createUser, updateTime, updateUser)
+        values(#{name}, #{note}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser})
+    </insert>
+
+    <delete id="deleteRoleById">
+        delete from sys_roles where id=#{id}
+    </delete>
+
+    <delete id="deleteAllByIds">
+        delete from sys_roles where id in
+        <foreach collection="array" open="(" close=")" item="id" separator=",">
+            ${id}
+        </foreach>
+    </delete>
+
+</mapper>
