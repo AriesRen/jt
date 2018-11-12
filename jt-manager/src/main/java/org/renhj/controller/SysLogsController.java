@@ -1,6 +1,5 @@
 package org.renhj.controller;
 
-import org.junit.runners.Parameterized;
 import org.renhj.common.PageObject;
 import org.renhj.common.Result;
 import org.renhj.entity.SysLogs;
@@ -8,13 +7,12 @@ import org.renhj.service.SysLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/sys/")
+@RequestMapping("/logs/")
 public class SysLogsController {
 
     @Autowired
@@ -22,7 +20,7 @@ public class SysLogsController {
 
     @RequestMapping("logsUI")
     public String logsUI(){
-        return "sys/index";
+        return "sys/index1";
     }
 
     @RequestMapping(value = "logs", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

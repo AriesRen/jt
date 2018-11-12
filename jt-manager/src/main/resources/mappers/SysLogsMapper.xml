@@ -15,7 +15,7 @@
     <select id="findLogsByUsernameWithPage" resultType="sysLogs">
         select * from sys_logs
         <include refid="whereForUsername"/>
-        order by createdTime desc
+        order by id desc
         limit #{startIndex}, #{endIndex}
     </select>
 
