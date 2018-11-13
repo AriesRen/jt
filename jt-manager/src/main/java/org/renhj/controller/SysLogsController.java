@@ -29,6 +29,7 @@ public class SysLogsController {
                                             @RequestParam(value = "pageCurrent", defaultValue = "1")Integer pageCurrent,
                                             @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize
                                    ){
+        System.out.println(username+" "+ pageSize + " " + pageCurrent);
         return new Result<PageObject<SysLogs>>(sysLogsService.findLogsByUsernameWithPage(username,pageCurrent, pageSize));
     }
 }
