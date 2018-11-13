@@ -1,5 +1,6 @@
 package org.renhj.controller;
 
+import org.renhj.annotation.RequestLog;
 import org.renhj.common.PageObject;
 import org.renhj.common.Result;
 import org.renhj.entity.SysLogs;
@@ -29,7 +30,13 @@ public class SysLogsController {
                                             @RequestParam(value = "pageCurrent", defaultValue = "1")Integer pageCurrent,
                                             @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize
                                    ){
-        System.out.println(username+" "+ pageSize + " " + pageCurrent);
         return new Result<PageObject<SysLogs>>(sysLogsService.findLogsByUsernameWithPage(username,pageCurrent, pageSize));
+    }
+
+    @RequestLog("删除日志")
+    @RequestMapping(value = "delete")
+    @ResponseBody
+    public Result<Integer> deleteLogs(@RequestParam("id")Integer id){
+        return new Result<Integer>(200, "删除成功！",sysLogsService.deleteLogsById(id));
     }
 }

@@ -7,7 +7,7 @@
     <sql id="whereForUsername">
         <where>
             <if test="username != null and ''!=username">
-                #{username}
+                username like concat("%",#{username},"%")
             </if>
         </where>
     </sql>
@@ -16,12 +16,25 @@
         select * from sys_logs
         <include refid="whereForUsername"/>
         order by id desc
-        limit #{startIndex}, #{endIndex}
+        limit #{startIndex}, #{pageSize}
     </select>
 
-    <select id="getRowCount" resultType="Integer">
+    <select id="getRowCount" resultType="int">
         select count(*) from sys_logs
         <include refid="whereForUsername"/>
+    </select>
+
+    <insert id="saveLogs" parameterType="sysLogs">
+        insert into sys_logs (id, username, operation, method, params, time, ip, createdTime)
+        values(null, #{username}, #{operation}, #{method}, #{params}, #{time}, #{ip}, #{createdTime})
+    </insert>
+
+    <delete id="deleteLogsById" parameterType="int">
+        delete from sys_logs where id = #{id}
+    </delete>
+
+    <select id="findLogsById" parameterType="int" resultType="sysLogs">
+        select * from sys_logs where id = #{id}
     </select>
 
 </mapper>

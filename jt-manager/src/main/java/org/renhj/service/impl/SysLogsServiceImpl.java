@@ -7,10 +7,10 @@ import org.renhj.exception.ServiceException;
 import org.renhj.service.SysLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.naming.ServiceUnavailableException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class SysLogsServiceImpl implements SysLogsService {
 
     @Autowired
@@ -20,7 +20,7 @@ public class SysLogsServiceImpl implements SysLogsService {
     public PageObject<SysLogs> findLogsByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize) {
         try {
             int rowCount = sysLogsDao.getRowCount(username);
-            int pageCount = (rowCount -1)%pageSize + 1;
+            int pageCount = (rowCount -1)/pageSize + 1;
 
             PageObject<SysLogs> pageObject = new PageObject<>();
             pageObject.setPageCurrent(pageCurrent);
@@ -32,6 +32,19 @@ public class SysLogsServiceImpl implements SysLogsService {
         }catch (Exception e){
             e.printStackTrace();
             throw new ServiceException("未知错误");
+        }
+    }
+
+    @Override
+    public Integer deleteLogsById(Integer id) {
+        try {
+            int row = sysLogsDao.deleteLogsById(id);
+            if (row!=1){
+                throw new ServiceException("删除失败");
+            }
+            return row;
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
     }
 }

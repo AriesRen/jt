@@ -10,12 +10,12 @@ public interface SysLogsDao {
      * 通过用户名查找日志并分页
      * @param username 用户名
      * @param startIndex 开始索引
-     * @param endIndex 结束索引
+     * @param pageSize 结束索引
      * @return sysLogs在区间startIndex到endIndex之间的数据
      */
     List<SysLogs> findLogsByUsernameWithPage(@Param("username") String username,
                                              @Param("startIndex") Integer startIndex,
-                                             @Param("endIndex") Integer endIndex);
+                                             @Param("pageSize") Integer pageSize);
 
     int getRowCount(@Param("username") String username);
 
@@ -25,4 +25,8 @@ public interface SysLogsDao {
      * @return 执行结果
      */
     int saveLogs(SysLogs logs);
+
+    int deleteLogsById(@Param("id") Integer id);
+
+    SysLogs findLogsById(@Param("id")Integer id);
 }

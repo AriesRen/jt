@@ -5,4 +5,5 @@ import org.renhj.entity.SysLogs;
 
 public interface SysLogsService {
     PageObject<SysLogs> findLogsByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
+    Integer deleteLogsById(Integer id);
 }

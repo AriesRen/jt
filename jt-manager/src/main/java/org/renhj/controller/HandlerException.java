@@ -12,4 +12,5 @@ public class HandlerException {
         return new Result<String>(500, e.getMessage(), "");
     }
 
+
 }

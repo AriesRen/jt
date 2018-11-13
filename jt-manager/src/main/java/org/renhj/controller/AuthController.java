@@ -1,5 +1,6 @@
 package org.renhj.controller;
 
+import org.renhj.annotation.RequestLog;
 import org.renhj.common.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,9 @@ public class AuthController {
         return "sys/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
+    @RequestLog("登录操作")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result<String> doLogin(String username, String password){
         System.out.println(username + "" + password);
         return new Result<String>("login success");

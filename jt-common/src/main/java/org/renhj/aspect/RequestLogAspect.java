@@ -1,6 +1,8 @@
 package org.renhj.aspect;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,30 +14,29 @@ import org.renhj.entity.SysLogs;
 import org.renhj.utils.IPUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Date;
 
 
 @Aspect
 @Component
-@Transactional
 public class RequestLogAspect {
 
     private final SysLogsDao sysLogsDao;
+    private final IPUtils ipUtils;
 
     @Autowired
-    public RequestLogAspect(SysLogsDao sysLogsDao) {
+    public RequestLogAspect(SysLogsDao sysLogsDao, IPUtils ipUtils) {
         this.sysLogsDao = sysLogsDao;
+        this.ipUtils = ipUtils;
     }
 
     @Pointcut("@annotation(org.renhj.annotation.RequestLog)")
     public void pointCut(){}
 
     @Around("pointCut()")
-    public Object arrountMehtod(ProceedingJoinPoint jp) throws Throwable {
+    public Object aroundMethod(ProceedingJoinPoint jp) throws Throwable {
         // 记录业务运行时间
         long startTime = System.currentTimeMillis();
         Object result = jp.proceed();
@@ -46,30 +47,48 @@ public class RequestLogAspect {
         return result;
     }
 
-    private void saveLog(ProceedingJoinPoint jp, long time) throws NoSuchMethodException {
-        // 1、获取目标数据
-        Class<?> clz = jp.getTarget().getClass(); // 目标对象
-        MethodSignature methodSignature = (MethodSignature) jp.getSignature(); // 获取执行方法的签名信息
-        String methodName = methodSignature.getName();
-        Method method = methodSignature.getMethod();
-        Method method1 = clz.getDeclaredMethod(methodName, methodSignature.getParameterTypes());
+    /**
+     * 将日志记录保存到数据库
+     * 1、获取目标数据
+     *     1.1 获取全方法名
+     *     1.2 获取注解值
+     *     1.3 获取方法参数
+     * 2、构造日志对象
+     * 3、将日志存储到数据库
+     *
+     * @param jp 起点
+     * @param time 执行时间
+     * @throws NoSuchMethodException 异常
+     */
+    private void saveLog(ProceedingJoinPoint jp, long time) throws NoSuchMethodException, JsonProcessingException {
+        // 1.1 获取全方法名
+        MethodSignature ms = (MethodSignature) jp.getSignature();
+        Class<?> clz = jp.getTarget().getClass();
+        String methodName = ms.getName();
+        // 通过类全名和方法名构造全方法名
+        String clzMethod = clz.getName() + "." + methodName;
 
-        // 获取目标方法上的注解
-        RequestLog requestLog = method1.getDeclaredAnnotation(RequestLog.class);
-        // 获取注解的值
-        String operation = requestLog.operation();
-        // 获取参数
+        // 1.2 获取目标方法上的注解的值
+        Method method = clz.getDeclaredMethod(methodName, ms.getParameterTypes());
+        RequestLog requestLog = method.getDeclaredAnnotation(RequestLog.class);
+        String operation = requestLog.value();
+
+        // 1.3 获取参数
         Object[] args = jp.getArgs();
+        String argsString = new ObjectMapper().writeValueAsString(args);
 
+        // 2、构造日志对象
         SysLogs logs = new SysLogs();
+        logs.setOperation(operation);
         logs.setCreatedTime(new Date());
-        logs.setMethod(methodName);
-        logs.setParams(Arrays.toString(args));
+        logs.setMethod(clzMethod);
+        logs.setParams(argsString);
         logs.setTime(time);
         // TODO:从session中获取用户名
         logs.setUsername("admin");
-        logs.setIp(IPUtils.getIP());
+        logs.setIp(ipUtils.getIP());
 
+        // 3、将日志对象存储到数据库中
         sysLogsDao.saveLogs(logs);
     }
 
