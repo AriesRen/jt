@@ -8,7 +8,7 @@
     </bean>
     <bean id="shiroFilterFactory" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/login"/>
+        <property name="loginUrl" value="/loginUI"/>
         <property name="filterChainDefinitionMap">
             <map>
                 <entry key="/css/**" value="anon"/>
@@ -16,6 +16,7 @@
                 <entry key="/js/**" value="anon"/>
                 <entry key="/images/**" value="anon" />
                 <entry key="/login" value="anon"/>
+                <entry key="/loginUI" value="anon"/>
                 <entry key="/**" value="authc"/>
             </map>
         </property>

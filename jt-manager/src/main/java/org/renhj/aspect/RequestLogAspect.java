@@ -14,22 +14,24 @@ import org.renhj.entity.SysLogs;
 import org.renhj.utils.IPUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 import java.util.Date;
 
 
 @Aspect
-@Component
+@Service
+@Transactional(propagation = Propagation.REQUIRED, readOnly = false, timeout = 30)
 public class RequestLogAspect {
 
     private final SysLogsDao sysLogsDao;
-    private final IPUtils ipUtils;
 
     @Autowired
-    public RequestLogAspect(SysLogsDao sysLogsDao, IPUtils ipUtils) {
+    public RequestLogAspect(SysLogsDao sysLogsDao) {
         this.sysLogsDao = sysLogsDao;
-        this.ipUtils = ipUtils;
     }
 
     @Pointcut("@annotation(org.renhj.annotation.RequestLog)")
@@ -68,6 +70,7 @@ public class RequestLogAspect {
         // 通过类全名和方法名构造全方法名
         String clzMethod = clz.getName() + "." + methodName;
 
+
         // 1.2 获取目标方法上的注解的值
         Method method = clz.getDeclaredMethod(methodName, ms.getParameterTypes());
         RequestLog requestLog = method.getDeclaredAnnotation(RequestLog.class);
@@ -86,7 +89,7 @@ public class RequestLogAspect {
         logs.setTime(time);
         // TODO:从session中获取用户名
         logs.setUsername("admin");
-        logs.setIp(ipUtils.getIP());
+        logs.setIp(IPUtils.getIP());
 
         // 3、将日志对象存储到数据库中
         sysLogsDao.saveLogs(logs);

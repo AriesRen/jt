@@ -2,20 +2,21 @@ package org.renhj.utils;
 
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @Component
 public class IPUtils {
-    private Logger logger = Logger.getLogger(this.getClass());
-    @Autowired
-    private HttpServletRequest request;
-
-    public String getIP(){
+    private static final Logger logger = Logger.getLogger(IPUtils.class);
+    public static String getIP(){
+        HttpServletRequest request=
+                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String ip = null;
         try {
             ip = request.getHeader("x-forwarded-for");

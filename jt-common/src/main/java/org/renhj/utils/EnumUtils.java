@@ -1,7 +1,7 @@
 package org.renhj.utils;
 
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
-import org.renhj.common.BaseEnum;
+
+import org.renhj.base.BaseEnum;
 
 public class EnumUtils {
     public static <T extends Enum<?> & BaseEnum> T codeOf(Class<T> enumClass, int code){

@@ -1,5 +1,6 @@
 package org.renhj.service.realm;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -11,6 +12,8 @@ import org.renhj.dao.SysUserDao;
 import org.renhj.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 @Service
 public class ShiroUserRealm extends AuthorizingRealm {
@@ -54,7 +57,10 @@ public class ShiroUserRealm extends AuthorizingRealm {
             throw new LockedAccountException("账户已锁定");
         }
         // 1.3、判断输入的密码和数据库中的密码是否符合
-
+        String password = String.valueOf(token.getPassword());
+        if (!user.getPassword().equals(password)){
+            throw new AuthenticationException("无效的用户名或密码!");
+        }
         // 2、对用户信息封装为AuthenticationInfo
 
         ByteSource salt = ByteSource.Util.bytes(user.getSalt());

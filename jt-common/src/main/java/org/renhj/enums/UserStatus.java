@@ -1,6 +1,7 @@
 package org.renhj.enums;
 
-import org.renhj.common.BaseEnum;
+
+import org.renhj.base.BaseEnum;
 
 public enum  UserStatus implements BaseEnum {
     NOACTIVE(0, "未激活"), ACTIVE(1, "已激活"), LOCKED(2, "已锁定");

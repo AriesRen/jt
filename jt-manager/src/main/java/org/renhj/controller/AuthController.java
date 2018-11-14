@@ -24,13 +24,14 @@ public class AuthController {
     @ResponseBody
     @RequestLog("登录操作")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result<String> doLogin(@RequestBody SysUser user){
+    public Result<Object> doLogin(@RequestBody SysUser user){
         // 1、对用户输入数据进行封装
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
         // 2、将用户信息提交到shiro
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
-        return new Result<String>("login success");
+        System.out.println(subject.getPrincipals());
+        return new Result<Object>(200, "login success", subject.getPrincipals());
     }
 
     @RequestMapping("/")

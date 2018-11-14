@@ -7,10 +7,12 @@ import org.renhj.exception.ServiceException;
 import org.renhj.service.SysLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 public class SysLogsServiceImpl implements SysLogsService {
 
     @Autowired
@@ -36,6 +38,7 @@ public class SysLogsServiceImpl implements SysLogsService {
     }
 
     @Override
+    @Transactional(readOnly = false, timeout = 30, propagation = Propagation.REQUIRED)
     public Integer deleteLogsById(Integer id) {
         try {
             int row = sysLogsDao.deleteLogsById(id);

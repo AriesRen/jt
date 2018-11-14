@@ -1,4 +1,4 @@
-package org.renhj.common;
+package org.renhj.base;
 
 public interface BaseEnum {
     int getCode();

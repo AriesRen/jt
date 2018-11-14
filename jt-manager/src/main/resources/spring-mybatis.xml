@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <util:properties id="db" location="classpath:db.properties"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -11,16 +12,23 @@
         <property name="password" value="#{db.password}"/>
     </bean>
 
-
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!--配置sqlSessionFactoryBean-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mappers/*.xml"/>
         <property name="typeAliasesPackage" value="org.renhj.entity"/>
-
+        <property name="typeHandlersPackage" value="org.renhj.handler"/>
     </bean>
-
+    <!--配置Mybatis映射文件扫描配置-->
     <bean id="mybatis" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="org.renhj.dao"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
     </bean>
+
+    <!--配置事务管理器(声明式事务）-->
+    <bean id="tranationalManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--启用注解方式进行事务管理-->
+    <tx:annotation-driven transaction-manager="tranationalManager"/>
 </beans>

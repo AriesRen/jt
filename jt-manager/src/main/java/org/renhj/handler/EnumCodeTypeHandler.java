@@ -1,9 +1,10 @@
-package org.renhj.enums.handler;
+package org.renhj.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
-import org.renhj.common.BaseEnum;
+import org.renhj.base.BaseEnum;
 import org.renhj.enums.UserStatus;
 import org.renhj.utils.EnumUtils;
 
@@ -12,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@MappedJdbcTypes({JdbcType.INTEGER})
+@MappedTypes({UserStatus.class})
 public class EnumCodeTypeHandler<E extends Enum<E> & BaseEnum> extends BaseTypeHandler<E> {
 
     private final Class<E> type;
