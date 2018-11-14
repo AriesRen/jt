@@ -11,10 +11,12 @@
         <property name="password" value="#{db.password}"/>
     </bean>
 
+
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mappers/*.xml"/>
         <property name="typeAliasesPackage" value="org.renhj.entity"/>
+
     </bean>
 
     <bean id="mybatis" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

@@ -49,6 +49,8 @@
         <shiro-spring.version>1.3.2</shiro-spring.version>
         <!--aspectj版本-->
         <aspectj.version>1.8.9</aspectj.version>
+
+        <slf4j.version>1.7.25</slf4j.version>
     </properties>
 
 </project>

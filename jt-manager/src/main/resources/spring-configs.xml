@@ -8,11 +8,6 @@
     <context:component-scan base-package="org.renhj"/>
     <mvc:annotation-driven/>
     <mvc:resources mapping="/static/**" location="/static/"/>
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
     
     <mvc:cors>
         <mvc:mapping path="/**"/>

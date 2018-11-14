@@ -1,16 +1,22 @@
 package org.renhj.enums;
 
-import org.springframework.web.util.pattern.PathPattern;
+import org.renhj.common.BaseEnum;
 
-public enum  UserStatus{
-    NOACTIVE(0), ACTIVE(1), LOCKED(2);
+public enum  UserStatus implements BaseEnum {
+    NOACTIVE(0, "未激活"), ACTIVE(1, "已激活"), LOCKED(2, "已锁定");
 
-    private Integer status;
-    UserStatus(Integer status){
+    private final int code;
+    private final String status;
+    UserStatus(int code, String status){
         this.status = status;
+        this.code = code;
     }
 
-    public Integer getStatus(){
+    public int getCode() {
+        return code;
+    }
+
+    public String getStatus() {
         return status;
     }
 }
