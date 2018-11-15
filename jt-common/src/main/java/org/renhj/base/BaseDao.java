@@ -1,4 +1,5 @@
 package org.renhj.base;
 
-public class BaseDao {
+public interface BaseDao {
+
 }

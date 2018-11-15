@@ -2,12 +2,15 @@ package org.renhj.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.renhj.base.BaseEntity;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class SysLogs implements Serializable {
+public class SysLogs extends BaseEntity implements Serializable{
     private static final long serialVersionUID = 5247794220446826747L;
 
     private Integer id;
@@ -24,10 +27,4 @@ public class SysLogs implements Serializable {
     // ip
     private String ip;
 
-    private Date createdTime;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getCreatedTime(){
-        return this.createdTime;
-    }
 }

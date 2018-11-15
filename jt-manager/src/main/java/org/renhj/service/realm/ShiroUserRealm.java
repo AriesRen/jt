@@ -28,6 +28,12 @@ public class ShiroUserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        // 1、获取用户信息
+        // 1.1 获取用户名
+        // 1.2 通过用户名从数据库查询用户信息
+        // 1.3、根据用户ID查询角色信息
+        // 1.4、根据角色信息查询菜单信息
+        // 1.5、根据菜单信息查询权限信息
         //5.对用户权限信息进行封装。
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
         return info;//将此数据返回给授权管理器

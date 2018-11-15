@@ -1,13 +1,16 @@
 package org.renhj.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.renhj.base.BaseEntity;
 import org.renhj.enums.UserStatus;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class SysUser implements Serializable {
+public class SysUser extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -7107295446381123401L;
 
     private Integer id;              // ID
@@ -17,8 +20,5 @@ public class SysUser implements Serializable {
     private UserStatus status;      // 账户状态（0 未激活， 1 激活， 2 锁定）
     private String email;           // 邮箱
     private String phone;           // 电话
-    private Date createdTime;      // 创建时间
-    private String createdUser;    // 谁创建的
-    private Date updatedTime;      // 修改时间
-    private String updatedUser;    // 修改用户
+
 }
