@@ -32,3 +32,23 @@ values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl
 
 
 UNLOCK TABLES;
+
+
+delimiter //
+drop procedure p;
+create procedure p()
+  begin
+    declare i int default 1;
+
+    while i<=10000 do
+      insert into
+      sys_logs(id, username, operation, method, params, time, ip, createdTime)
+      values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',3,'0:0:0:0:0:0:0:1','2018-04-17 19:53:38');
+      set i = i + 1;
+    end while;
+  end;
+//
+
+call p();
+delimiter ;
+drop procedure p;
