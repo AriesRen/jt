@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AuthController {
 
-    @RequestMapping("/loginUI")
+    @RequestMapping(value = "/loginUI", method = RequestMethod.GET)
     public String loginUI(){
         return "sys/login";
     }
@@ -37,5 +37,12 @@ public class AuthController {
     @RequestMapping("/")
     public String index(){
         return "sys/index";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public Result<Object> doLogout(){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return new Result<Object>(200, "login success", "");
     }
 }

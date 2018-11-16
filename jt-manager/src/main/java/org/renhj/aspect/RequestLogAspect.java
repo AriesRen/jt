@@ -3,6 +3,8 @@ package org.renhj.aspect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -88,7 +90,9 @@ public class RequestLogAspect {
         logs.setParams(argsString);
         logs.setTime(time);
         // TODO:从session中获取用户名
-        logs.setUsername("admin");
+        Subject currentUser = SecurityUtils.getSubject();
+        String username = (String) currentUser.getSession().getAttribute("username");
+        logs.setUsername(username);
         logs.setIp(IPUtils.getIP());
 
         // 3、将日志对象存储到数据库中
