@@ -12,8 +12,14 @@ import java.util.Date;
 public class SysMenu extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -1272449917254099069L;
 
+    public SysMenu(){
+        super();
+    }
+
     private Integer id;
-    private String name;
+    private String menu;
     private String url;
-    private Integer parentId;
+    private String icon;
+    private String status;
+    private Integer parentID;
 }

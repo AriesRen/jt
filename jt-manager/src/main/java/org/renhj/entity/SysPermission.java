@@ -12,7 +12,11 @@ import java.util.Date;
 public class SysPermission extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -3574135278060445002L;
 
+    public SysPermission(){
+        super();
+    }
+
     private Integer id;
     private String permission;
-    private String name;
+    private String note;
 }

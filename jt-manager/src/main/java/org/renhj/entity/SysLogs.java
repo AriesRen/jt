@@ -13,6 +13,10 @@ import java.util.Date;
 public class SysLogs extends BaseEntity implements Serializable{
     private static final long serialVersionUID = 5247794220446826747L;
 
+    public SysLogs(){
+        super();
+    }
+
     private Integer id;
     // 用户名
     private String username;

@@ -13,6 +13,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.renhj.annotation.RequestLog;
 import org.renhj.dao.SysLogsDao;
 import org.renhj.entity.SysLogs;
+import org.renhj.entity.SysUser;
 import org.renhj.utils.IPUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -72,7 +73,6 @@ public class RequestLogAspect {
         // 通过类全名和方法名构造全方法名
         String clzMethod = clz.getName() + "." + methodName;
 
-
         // 1.2 获取目标方法上的注解的值
         Method method = clz.getDeclaredMethod(methodName, ms.getParameterTypes());
         RequestLog requestLog = method.getDeclaredAnnotation(RequestLog.class);
@@ -91,7 +91,10 @@ public class RequestLogAspect {
         logs.setTime(time);
         // TODO:从session中获取用户名
         Subject currentUser = SecurityUtils.getSubject();
-        String username = (String) currentUser.getSession().getAttribute("username");
+        System.out.println("currentUser.getPrincipal(): " + currentUser.getPrincipal());
+        System.out.println("currentUser.getPrincipals: "+currentUser.getPrincipals());
+        System.out.println("currentUser.getPrincipals().byType(SysUser.class): " + currentUser.getPrincipals().byType(SysUser.class));
+        String username = currentUser.toString();
         logs.setUsername(username);
         logs.setIp(IPUtils.getIP());
 

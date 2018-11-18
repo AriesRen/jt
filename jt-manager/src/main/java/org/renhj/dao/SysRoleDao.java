@@ -1,4 +1,4 @@
 package org.renhj.dao;
 
-public class SysRoleDao {
+public interface SysRoleDao {
 }

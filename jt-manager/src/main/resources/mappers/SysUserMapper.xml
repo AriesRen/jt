@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.renhj.dao.SysUserDao">
 
+    <sql id="whereForUsername">
+        <where>
+            <if test="username != null and ''!=username">
+                username like concat("%",#{username},"%")
+            </if>
+        </where>
+    </sql>
+
+
     <select id="findUserById" resultType="sysUser">
         select * from sys_users where id = #{id}
     </select>
@@ -11,4 +20,27 @@
         select * from sys_users where username = #{username}
     </select>
 
+    <select id="findUserWithPage" resultType="sysUser">
+        select * from sys_users
+        <include refid="whereForUsername"/>
+        order by id desc
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="getRowCount" resultType="int">
+        select count(id) from sys_users
+        <include refid="whereForUsername"/>
+    </select>
+
+    <insert id="saveUser" parameterType="SysUser" keyColumn="id" useGeneratedKeys="true">
+        insert into sys_users(id, username, password, salt, email, phone, status, createdTime, createdUser, updatedTime, updatedUser)
+        values (#{id}, #{username}, #{password}, #{salt}, #{email}, #{phone}, #{status}, now(), #{createdUser}, now(), #{updatedUser})
+    </insert>
+    
+    <delete id="deleteUserById" parameterType="int">
+        delete from sys_users where  id = #{id}
+    </delete>
+
+
+    
 </mapper>

@@ -13,6 +13,10 @@ import java.util.Date;
 public class SysUser extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -7107295446381123401L;
 
+    public SysUser(){
+        super();
+    }
+
     private Integer id;              // ID
     private String username;        // 用户名
     private String password;        // 用户密码
@@ -20,5 +24,4 @@ public class SysUser extends BaseEntity implements Serializable {
     private UserStatus status;      // 账户状态（0 未激活， 1 激活， 2 锁定）
     private String email;           // 邮箱
     private String phone;           // 电话
-
 }

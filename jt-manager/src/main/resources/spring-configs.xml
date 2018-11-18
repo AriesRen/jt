@@ -7,7 +7,8 @@
 
     <context:component-scan base-package="org.renhj"/>
     <mvc:annotation-driven/>
-    <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/static/**" location="/static/"/>
     
     <mvc:cors>
         <mvc:mapping path="/**"/>

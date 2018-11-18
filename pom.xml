@@ -10,7 +10,10 @@
         <module>jt-manager</module>
         <module>jt-web</module>
         <module>jt-common</module>
-        <module>jt-sys</module>
+        <module>jt-search</module>
+        <module>jt-cart</module>
+        <module>jt-sso</module>
+        <module>jt-order</module>
 
     </modules>
     <packaging>pom</packaging>
@@ -52,5 +55,19 @@
 
         <slf4j.version>1.7.25</slf4j.version>
     </properties>
+
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+                <!--<version>2.2</version>-->
+                <!--<configuration>-->
+                    <!--<port>8080</port>-->
+                    <!--<path>/</path>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
 
 </project>
