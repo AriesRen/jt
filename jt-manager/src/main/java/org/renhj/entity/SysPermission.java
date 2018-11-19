@@ -4,17 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.renhj.base.BaseEntity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysPermission extends BaseEntity implements Serializable {
+public class SysPermission extends BaseEntity {
     private static final long serialVersionUID = -3574135278060445002L;
-
-    public SysPermission(){
-        super();
-    }
 
     private Integer id;
     private String permission;

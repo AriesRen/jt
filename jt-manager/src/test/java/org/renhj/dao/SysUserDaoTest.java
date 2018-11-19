@@ -19,7 +19,7 @@ public class SysUserDaoTest extends TestBase {
 
     @Test
     public void findUserByUsername() {
-        String s  = EnumUtils.codeOf(UserStatus.class, 1).getStatus();
+        String s  = EnumUtils.codeOf(UserStatus.class, 1).getDesc();
         System.out.println(s);
     }
 }

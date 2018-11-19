@@ -5,17 +5,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.renhj.base.BaseEntity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysLogs extends BaseEntity implements Serializable{
+public class SysLogs extends BaseEntity{
     private static final long serialVersionUID = 5247794220446826747L;
-
-    public SysLogs(){
-        super();
-    }
 
     private Integer id;
     // 用户名

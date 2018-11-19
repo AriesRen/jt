@@ -38,4 +38,10 @@ public class SysUserServiceImpl implements SysUserService {
     public int saveUser(SysUser user) {
         return sysUserDao.saveUser(user);
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public int deleteUser(Integer id) {
+        return sysUserDao.deleteUserById(id);
+    }
 }

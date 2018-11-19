@@ -32,6 +32,6 @@ public class Result<T> implements Serializable {
     }
     public Result(ResultCode code){
         this.code = code.getCode();
-        this.message = code.getMessage();
+        this.message = code.getDesc();
     }
 }

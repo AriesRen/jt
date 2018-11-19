@@ -8,12 +8,8 @@ import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysRole extends BaseEntity implements Serializable {
+public class SysRole extends BaseEntity {
     private static final long serialVersionUID = 6276276680024469140L;
-
-    public SysRole(){
-        super();
-    }
 
     private Integer id;
     private String role;  // admin

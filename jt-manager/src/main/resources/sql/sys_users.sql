@@ -6,7 +6,7 @@ create table `sys_users`(
   `salt` varchar(32) default null comment '盐',
   `email` varchar(32) default null unique comment '邮箱',
   `phone` varchar(32) default null unique comment '电话',
-  `status` int default 0 comment '用户状态',
+  `status` tinyint(4) default 0 comment '用户状态',
   `createdTime` datetime default null comment '创建时间',
   `createdUser` varchar(100) default null comment '创建用户',
   `updatedTime` datetime default null comment '更新时间',

@@ -7,4 +7,6 @@ public interface SysUserService {
     PageObject<SysUser> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
 
     int saveUser(SysUser user);
+
+    int deleteUser(Integer id);
 }

@@ -10,12 +10,8 @@ import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysUser extends BaseEntity implements Serializable {
+public class SysUser extends BaseEntity{
     private static final long serialVersionUID = -7107295446381123401L;
-
-    public SysUser(){
-        super();
-    }
 
     private Integer id;              // ID
     private String username;        // 用户名

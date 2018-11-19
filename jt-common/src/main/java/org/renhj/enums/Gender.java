@@ -1,15 +1,23 @@
 package org.renhj.enums;
 
-public enum Gender {
-    MALE("男"),
-    FEMALE("女");
+import org.renhj.base.BaseEnum;
 
-    private String gender;
-    Gender(String gender){
-        this.gender = gender;
+public enum Gender implements BaseEnum {
+    MALE(0,"男"),
+    FEMALE(1,"女");
+
+    private int code;
+    private String desc;
+    Gender(int code, String desc){
+        this.desc = desc;
+        this.code = code;
     }
 
-    public String getGender(){
-        return gender;
+    public int getCode(){return code;}
+
+    @Override
+    public String getDesc() {
+        return desc;
     }
+
 }

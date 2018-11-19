@@ -17,7 +17,7 @@
                 <entry key="/images/**" value="anon" />
                 <entry key="/login" value="anon"/>
                 <entry key="/loginUI" value="anon"/>
-                <entry key="/**" value="authc"/>
+                <entry key="/**" value="anon"/>
             </map>
         </property>
     </bean>

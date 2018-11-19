@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.renhj.dao.SysUserDao">
+
+    <sql id="whereForTitle">
+        <where>
+            <if test="title != null and ''!=title">
+                title like concat("%",#{title},"%")
+            </if>
+        </where>
+    </sql>
+
+    <!--按ID查询item-->
+    <select id="findItemById" resultType="sysItem">
+        select * from sys_items where id=#{id}
+    </select>
+    <!--按title模糊查询并分页-->
+    <select id="findItemByTitleWithPage" resultType="sysItem">
+        select * from sys_items
+        <include refid="whereForTitle"/>
+        order by createdTime desc
+        limit #{startIndex}, #{pageSize}
+    </select>
+    <!--按title模糊查询获得总记录数-->
+    <select id="getRowCount" resultType="int">
+        select  count(id) from sys_items
+        <include refid="whereForTitle"/>
+    </select>
+
+    <!--保存一个item-->
+    <insert id="saveItem" parameterType="sysItem">
+        insert into sys_items(id, cid, brand, model, title, sellPoint, price, num, barcode, image, status, createdTime, createdUser, updatedTime, updatedUser)
+        values (null, #{cid}, #{brand}, #{model}, #{title}, #{sellPoint}, #{price}, #{num}, #{barcode}, #{image}, #{status}, now(), #{createdUser}, now(), #{updatedUser})
+    </insert>
+
+    <delete id="deleteTitleById" parameterType="int">
+        delete from sys_items where  id=#{id}
+    </delete>
+
+    
+</mapper>

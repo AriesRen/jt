@@ -7,9 +7,9 @@ public enum  UserStatus implements BaseEnum {
     NOACTIVE(0, "未激活"), ACTIVE(1, "已激活"), LOCKED(2, "已锁定");
 
     private final int code;
-    private final String status;
-    UserStatus(int code, String status){
-        this.status = status;
+    private final String desc;
+    UserStatus(int code, String desc){
+        this.desc = desc;
         this.code = code;
     }
 
@@ -17,7 +17,7 @@ public enum  UserStatus implements BaseEnum {
         return code;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDesc() {
+        return desc;
     }
 }
