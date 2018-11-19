@@ -7,31 +7,33 @@ create table `sys_logs`(
   `params` varchar(500) default null comment '参数',
   `time` bigint(20) default null comment '执行时间(毫秒）',
   `ip` varchar(100) default null comment 'ip',
-  `createdTime` datetime default null comment '创建时间'
+  `createdTime` datetime default null comment '创建时间',
+  `updatedTime` datetime default null comment '更改时间',
+  `createdUser` varchar(200) default null comment '创建用户',
+  `updatedUser` varchar(200) default null comment '修改用户'
 ) engine=innodb charset=utf8 comment='日志';
 
-LOCK TABLES `sys_logs` WRITE;
 insert into
-sys_logs(id, username, operation, method, params, time, ip, createdTime)
-values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',3,'0:0:0:0:0:0:0:1','2018-04-17 19:53:38');
+sys_logs(id, username, operation, method, params, time, ip, createdTime, updatedTime, createdUser, updatedUser)
+values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',3,'0:0:0:0:0:0:0:1','2018-04-17 19:53:38', now(), 'renhj', 'admin');
 
 insert into
-sys_logs(id, username, operation, method, params, time, ip, createdTime)
-values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05');
+sys_logs(id, username, operation, method, params, time, ip, createdTime, updatedTime, createdUser, updatedUser)
+values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05', now(), 'renhj', 'admin');
 insert into
-sys_logs(id, username, operation, method, params, time, ip, createdTime)
-values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05');
-
-insert into
-sys_logs(id, username, operation, method, params, time, ip, createdTime)
-values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05');
+sys_logs(id, username, operation, method, params, time, ip, createdTime, updatedTime, createdUser, updatedUser)
+values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05', now(), 'renhj', 'admin');
 
 insert into
-sys_logs(id, username, operation, method, params, time, ip, createdTime)
-values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05');
+sys_logs(id, username, operation, method, params, time, ip, createdTime, updatedTime, createdUser, updatedUser)
+values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05', now(), 'renhj', 'admin');
+
+insert into
+sys_logs(id, username, operation, method, params, time, ip, createdTime, updatedTime, createdUser, updatedUser)
+values (null ,'admin','登陆操作','com.jt.sys.service.impl.SysUserServiceImpl.login()','\"admin\"',2,'0:0:0:0:0:0:0:1','2018-04-17 19:54:05', now(), 'renhj', 'admin');
 
 
-UNLOCK TABLES;
+
 
 
 delimiter //

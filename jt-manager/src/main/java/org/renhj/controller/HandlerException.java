@@ -4,7 +4,7 @@ import org.renhj.common.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class HandlerException {
 
     @ExceptionHandler(Exception.class)

@@ -14,5 +14,5 @@ create table `sys_users`(
 ) engine=innodb charset=utf8 comment='用户信息';
 
 insert into sys_users(username, password, salt, email, phone, status, createdTime, createdUser, updatedTime, updatedUser)
-values ("admin", "admin", "salt", "admin@admin.com", "123456789", 1, now(),"admin", now(), "admin");
+values ('admin', 'admin', "salt", 'admin@admin.com', '123456789', 1, now(),'admin', now(), 'admin');
 

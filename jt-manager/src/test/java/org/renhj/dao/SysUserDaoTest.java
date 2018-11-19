@@ -22,4 +22,15 @@ public class SysUserDaoTest extends TestBase {
         String s  = EnumUtils.codeOf(UserStatus.class, 1).getDesc();
         System.out.println(s);
     }
+
+    @Test
+    public void updateUser() {
+        SysUserDao dao = ctx.getBean("sysUserDao", SysUserDao.class);
+        SysUser user = dao.findUserById(1);
+        System.out.println(user);
+        user.setStatus(UserStatus.ACTIVE);
+        user.setUpdatedUser("admin");
+        int i = dao.updateUser(user);
+        System.out.println(i);
+    }
 }

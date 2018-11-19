@@ -41,6 +41,20 @@
         delete from sys_users where  id = #{id}
     </delete>
 
+    <update id="updateUser" parameterType="sysUser">
+        update sys_users
+        <set>
+            <if test="username!=null">username=#{username},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="salt!=null">salt=#{salt},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="status!=null">status=#{status},</if>
+            updatedUser=#{updatedUser}, updatedTime=now()
+        </set>
+        where id=#{id}
+    </update>
+
 
     
 </mapper>

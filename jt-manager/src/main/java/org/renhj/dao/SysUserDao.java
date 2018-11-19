@@ -20,4 +20,6 @@ public interface SysUserDao {
     int saveUser(SysUser user);
 
     int deleteUserById(Integer id);
+
+    int updateUser(SysUser user);
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.renhj.dao.SysRoleDao">
+
+    <sql id="whereForRole">
+        <where>
+            <if test="role!=null and role!=''">
+                role like concat("%",#{role},"%")
+            </if>
+        </where>
+    </sql>
+
+    <select id="findRoleByRoleWithPage" resultType="sysRole">
+        select * from sys_roles
+        <include refid="whereForRole"/>
+        order by id
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+
+    <insert id="saveRole" parameterType="sysRole">
+        insert into sys_roles(id, role, note, createdTime, updatedTime, createdUser, updatedUser)
+        VALUES(null, #{role}, #{note}, now(), now(), #{createdUser}, #{updatedUser})
+    </insert>
+
+
+    <delete id="deleteRoleById" parameterType="int">
+        delete from sys_roles where id = #{id}
+    </delete>
+
+
+    <!--<update id="updateRole" parameterType="sysRole">-->
+        <!--update sys_roles-->
+        <!--set role = #{role}, note = #{note}, updatedTime = now(), updatedUser=#{updatedUser}-->
+        <!--where id = #{id}-->
+    <!--</update>-->
+
+</mapper>
