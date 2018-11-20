@@ -26,7 +26,7 @@ public interface SysLogsDao {
      */
     int saveLogs(SysLogs logs);
 
-    int deleteLogsById(@Param("id") Integer id);
+    int deleteLogsById(@Param("id") Long id);
 
-    SysLogs findLogsById(@Param("id")Integer id);
+    SysLogs findLogsById(@Param("id")Long id);
 }

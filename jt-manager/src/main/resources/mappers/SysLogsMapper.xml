@@ -29,11 +29,11 @@
         values(null, #{username}, #{operation}, #{method}, #{params}, #{time}, #{ip}, #{createdTime})
     </insert>
 
-    <delete id="deleteLogsById" parameterType="int">
+    <delete id="deleteLogsById" parameterType="long">
         delete from sys_logs where id = #{id}
     </delete>
 
-    <select id="findLogsById" parameterType="int" resultType="sysLogs">
+    <select id="findLogsById" parameterType="long" resultType="sysLogs">
         select * from sys_logs where id = #{id}
     </select>
 

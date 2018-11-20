@@ -7,7 +7,7 @@ import org.renhj.entity.SysUser;
 import java.util.List;
 
 public interface SysItemDao {
-    SysItem findItemById(Integer id);
+    SysItem findItemById(Long id);
 
     List<SysItem> findItemByTitleWithPage(@Param("startIndex") Integer startIndex,
                                    @Param("pageSize")Integer pageSize,
@@ -17,5 +17,7 @@ public interface SysItemDao {
 
     int saveItem(SysItem item);
 
-    int deleteTitleById(Integer id);
+    int deleteTitleById(Long id);
+
+    int updateItem(SysItem item);
 }

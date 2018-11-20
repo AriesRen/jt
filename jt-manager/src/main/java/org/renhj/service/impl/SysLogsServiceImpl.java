@@ -39,7 +39,7 @@ public class SysLogsServiceImpl implements SysLogsService {
 
     @Override
     @Transactional(readOnly = false, timeout = 30, propagation = Propagation.REQUIRED)
-    public Integer deleteLogsById(Integer id) {
+    public Integer deleteLogsById(Long id) {
         try {
             int row = sysLogsDao.deleteLogsById(id);
             if (row!=1){
@@ -49,5 +49,14 @@ public class SysLogsServiceImpl implements SysLogsService {
         }catch (Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public SysLogs findLogsById(Long id) {
+        SysLogs logs =  sysLogsDao.findLogsById(id);
+        if (logs == null){
+            throw new ServiceException("未找到此记录！");
+        }
+        return logs;
     }
 }

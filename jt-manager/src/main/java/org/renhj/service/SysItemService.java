@@ -8,5 +8,9 @@ public interface SysItemService {
 
     int saveItem(SysItem item);
 
-    int deleteItem(Integer id);
+    int deleteItem(Long id);
+
+    SysItem findItemById(Long id);
+
+    SysItem updateItem(SysItem item);
 }

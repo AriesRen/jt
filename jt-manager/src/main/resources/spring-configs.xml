@@ -11,7 +11,7 @@
     <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
     
     <mvc:cors>
-        <mvc:mapping path="/**"/>
+        <mvc:mapping path="/**" allowed-methods="*" allowed-headers="*" allowed-origins="*"/>
     </mvc:cors>
 
     <bean id="viewResovler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

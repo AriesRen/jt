@@ -35,9 +35,26 @@
         values (null, #{cid}, #{brand}, #{model}, #{title}, #{sellPoint}, #{price}, #{num}, #{barcode}, #{image}, #{status}, now(), #{createdUser}, now(), #{updatedUser})
     </insert>
 
-    <delete id="deleteTitleById" parameterType="int">
+    <delete id="deleteTitleById" parameterType="long">
         delete from sys_items where  id=#{id}
     </delete>
 
+    <update id="updateItem" parameterType="sysItem">
+        update sys_items
+        <set>
+            <if test="cid!=null">cid=#{cid},</if>
+            <if test="brand!=null">brand=#{brand},</if>
+            <if test="model!=null">model=#{model},</if>
+            <if test="title!=null">title=#{title},</if>
+            <if test="sellPoint!=null">sellPoint=#{sellPoint},</if>
+            <if test="price!=null">price=#{price},</if>
+            <if test="num!=null">num=#{num},</if>
+            <if test="barcode!=null">barcode=#{barcode},</if>
+            <if test="image!=null">cid=#{image},</if>
+            <if test="status!=null">status=#{status},</if>
+            updatedUser=#{updatedUser}, updatedTime=now()
+        </set>
+        where id=#{id}
+    </update>
     
 </mapper>
