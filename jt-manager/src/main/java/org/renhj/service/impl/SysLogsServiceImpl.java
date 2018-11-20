@@ -3,6 +3,7 @@ package org.renhj.service.impl;
 import org.renhj.common.PageObject;
 import org.renhj.dao.SysLogsDao;
 import org.renhj.entity.SysLogs;
+import org.renhj.exception.ResourceNotExistException;
 import org.renhj.exception.ServiceException;
 import org.renhj.service.SysLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class SysLogsServiceImpl implements SysLogsService {
     public SysLogs findLogsById(Long id) {
         SysLogs logs =  sysLogsDao.findLogsById(id);
         if (logs == null){
-            throw new ServiceException("未找到此记录！");
+            throw new ResourceNotExistException("未找到此记录！");
         }
         return logs;
     }

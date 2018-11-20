@@ -1,8 +1,10 @@
 package org.renhj.service.impl;
 
+import org.apache.maven.wagon.ResourceDoesNotExistException;
 import org.renhj.common.PageObject;
 import org.renhj.dao.SysUserDao;
 import org.renhj.entity.SysUser;
+import org.renhj.exception.ResourceNotExistException;
 import org.renhj.exception.ServiceException;
 import org.renhj.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,10 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public PageObject<SysUser> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize) {
-
         int rows = sysUserDao.getRowCount(username); // 记录数
-        if (rows < 1){throw new ServiceException("没有记录！");}
+        if (rows < 1){
+            throw new ServiceException("没有记录！");
+        }
         List<SysUser> users = sysUserDao.findUserWithPage((pageCurrent-1)*pageSize, pageSize, username);
         PageObject<SysUser> pageObject = new PageObject<>();
         pageObject.setRecords(users);
@@ -35,13 +38,29 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     @Transactional(readOnly = false)
-    public int saveUser(SysUser user) {
-        return sysUserDao.saveUser(user);
+    public SysUser saveUser(SysUser user) {
+        sysUserDao.saveUser(user);
+        return user;
     }
 
     @Override
     @Transactional(readOnly = false)
-    public int deleteUser(Integer id) {
+    public int deleteUser(Long id) {
         return sysUserDao.deleteUserById(id);
+    }
+
+    @Override
+    public SysUser findUserById(Long id) {
+        SysUser user = sysUserDao.findUserById(id);
+        if (user == null){
+            throw new ResourceNotExistException("该用户不存在！");
+        }
+        return sysUserDao.findUserById(id);
+    }
+
+    @Override
+    public SysUser updateUser(SysUser user) {
+        sysUserDao.updateUser(user);
+        return sysUserDao.findUserById(user.getId());
     }
 }

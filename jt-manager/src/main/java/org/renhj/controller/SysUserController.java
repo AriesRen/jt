@@ -33,14 +33,25 @@ public class SysUserController {
     @PostMapping(value = "")
     @ResponseBody
     public Result<Object> postUser(SysUser user){
-        sysUserService.saveUser(user);
-        return new Result<Object>(201, "save ok", user);
+        return new Result<Object>(201, "save ok", sysUserService.saveUser(user));
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Result<SysUser> getUser(@PathVariable("id")Long id){
+        return new Result<SysUser>(200, "success",sysUserService.findUserById(id));
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseBody
-    public Result<Object> deleteUser(@PathVariable("id")Integer id){
+    public Result<Object> deleteUser(@PathVariable("id")Long id){
         return new Result<Object>(sysUserService.deleteUser(id));
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseBody
+    public Result<SysUser> updateUser(@PathVariable("id")Long id, @RequestBody SysUser user){
+        return new Result<SysUser>(200, "update ok", sysUserService.updateUser(user));
     }
 
 }

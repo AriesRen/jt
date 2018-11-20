@@ -9,7 +9,7 @@ import org.renhj.base.BaseEntity;
 public class SysPermission extends BaseEntity {
     private static final long serialVersionUID = -3574135278060445002L;
 
-    private Integer id;
+    private Long id;
     private String permission;
     private String note;
 }

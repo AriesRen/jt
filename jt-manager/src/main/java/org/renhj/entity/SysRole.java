@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SysRole extends BaseEntity {
     private static final long serialVersionUID = 6276276680024469140L;
 
-    private Integer id;
+    private Long id;
     private String role;  // admin
     private String note;  // 管理员
 

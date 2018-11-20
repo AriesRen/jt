@@ -32,16 +32,16 @@
         <include refid="whereForUsername"/>
     </select>
 
-    <insert id="saveUser" parameterType="SysUser" keyColumn="id" useGeneratedKeys="true">
+    <insert id="saveUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="id">
         insert into sys_users(id, username, password, salt, email, phone, status, createdTime, createdUser, updatedTime, updatedUser)
         values (#{id}, #{username}, #{password}, #{salt}, #{email}, #{phone}, #{status}, now(), #{createdUser}, now(), #{updatedUser})
     </insert>
     
-    <delete id="deleteUserById" parameterType="int">
+    <delete id="deleteUserById" parameterType="long">
         delete from sys_users where  id = #{id}
     </delete>
 
-    <update id="updateUser" parameterType="sysUser">
+    <update id="updateUser" parameterType="sysUser" useGeneratedKeys="true" keyProperty="id">
         update sys_users
         <set>
             <if test="username!=null">username=#{username},</if>

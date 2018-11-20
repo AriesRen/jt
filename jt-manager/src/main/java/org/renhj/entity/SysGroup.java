@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SysGroup extends BaseEntity{
     private static final long serialVersionUID = -3132589566810636773L;
 
-    private Integer id;
+    private Long id;
     private String group;
     private Integer parentID;
 }

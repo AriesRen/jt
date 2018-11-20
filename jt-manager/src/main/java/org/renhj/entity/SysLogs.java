@@ -10,7 +10,7 @@ import org.renhj.base.BaseEntity;
 public class SysLogs extends BaseEntity{
     private static final long serialVersionUID = 5247794220446826747L;
 
-    private Integer id;
+    private Long id;
     // 用户名
     private String username;
     // 操作

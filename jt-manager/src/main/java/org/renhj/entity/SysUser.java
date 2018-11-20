@@ -13,7 +13,7 @@ import java.util.Date;
 public class SysUser extends BaseEntity{
     private static final long serialVersionUID = -7107295446381123401L;
 
-    private Integer id;              // ID
+    private Long id;              // ID
     private String username;        // 用户名
     private String password;        // 用户密码
     private String salt;            // 密码加密盐

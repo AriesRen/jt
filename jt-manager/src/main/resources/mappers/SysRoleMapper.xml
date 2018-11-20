@@ -19,22 +19,14 @@
         limit #{startIndex}, #{pageSize}
     </select>
 
-
     <insert id="saveRole" parameterType="sysRole">
         insert into sys_roles(id, role, note, createdTime, updatedTime, createdUser, updatedUser)
         VALUES(null, #{role}, #{note}, now(), now(), #{createdUser}, #{updatedUser})
     </insert>
 
-
-    <delete id="deleteRoleById" parameterType="int">
+    <delete id="deleteRoleById" parameterType="long">
         delete from sys_roles where id = #{id}
     </delete>
 
-
-    <!--<update id="updateRole" parameterType="sysRole">-->
-        <!--update sys_roles-->
-        <!--set role = #{role}, note = #{note}, updatedTime = now(), updatedUser=#{updatedUser}-->
-        <!--where id = #{id}-->
-    <!--</update>-->
 
 </mapper>

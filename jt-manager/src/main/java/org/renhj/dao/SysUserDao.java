@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SysUserDao {
 
-    SysUser findUserById(Integer id);
+    SysUser findUserById(Long id);
 
     SysUser findUserByUsername(String username);
 
@@ -19,7 +19,7 @@ public interface SysUserDao {
 
     int saveUser(SysUser user);
 
-    int deleteUserById(Integer id);
+    int deleteUserById(Long id);
 
     int updateUser(SysUser user);
 }

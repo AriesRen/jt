@@ -3,7 +3,6 @@ package org.renhj.common;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.renhj.enums.ResultCode;
 
 import java.io.Serializable;

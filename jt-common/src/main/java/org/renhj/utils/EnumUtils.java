@@ -1,6 +1,5 @@
 package org.renhj.utils;
 
-
 import org.renhj.base.BaseEnum;
 
 public class EnumUtils {

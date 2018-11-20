@@ -10,7 +10,7 @@ import org.renhj.base.BaseEntity;
 public class SysMenu extends BaseEntity {
     private static final long serialVersionUID = -1272449917254099069L;
 
-    private Integer id;
+    private Long id;
     private String menu;
     private String url;
     private String icon;

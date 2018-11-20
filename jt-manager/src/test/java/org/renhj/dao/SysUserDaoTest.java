@@ -13,7 +13,7 @@ public class SysUserDaoTest extends TestBase {
     @Test
     public void findUserById() {
         SysUserDao dao = ctx.getBean("sysUserDao", SysUserDao.class);
-        SysUser user = dao.findUserById(1);
+        SysUser user = dao.findUserById(1L);
         System.out.println(user);
     }
 
@@ -26,7 +26,7 @@ public class SysUserDaoTest extends TestBase {
     @Test
     public void updateUser() {
         SysUserDao dao = ctx.getBean("sysUserDao", SysUserDao.class);
-        SysUser user = dao.findUserById(1);
+        SysUser user = dao.findUserById(1L);
         System.out.println(user);
         user.setStatus(UserStatus.ACTIVE);
         user.setUpdatedUser("admin");
