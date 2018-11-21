@@ -10,14 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/items")
 public class SysItemController {
     @Autowired
     private SysItemService itemService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    @ResponseBody
     public Result<PageObject> itemsList(@RequestParam(value = "pageCurrent", defaultValue = "1")Integer pageCurrent,
                                         @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                         @RequestParam(value = "title", defaultValue = "")String title){
@@ -25,13 +24,11 @@ public class SysItemController {
     }
 
     @PostMapping(value = "")
-    @ResponseBody
     public Result<Object> insertItem(@RequestBody SysItem item){
         return new Result<Object>(itemService.saveItem(item));
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public Result<Object> findItem(@PathVariable("id")Long id){
         return new Result<Object>(200, "success", itemService.findItemById(id));
     }
