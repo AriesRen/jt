@@ -1,6 +1,5 @@
 package org.renhj.service.impl;
 
-import org.apache.maven.wagon.ResourceDoesNotExistException;
 import org.renhj.common.PageObject;
 import org.renhj.dao.SysUserDao;
 import org.renhj.entity.SysUser;
