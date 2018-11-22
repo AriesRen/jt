@@ -23,7 +23,7 @@ public class SysUserServiceImpl implements SysUserService {
     public PageObject<SysUser> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize) {
         int rows = sysUserDao.getRowCount(username); // 记录数
         if (rows < 1){
-            throw new ServiceException("没有记录！");
+            return null;
         }
         List<SysUser> users = sysUserDao.findUserWithPage((pageCurrent-1)*pageSize, pageSize, username);
         PageObject<SysUser> pageObject = new PageObject<>();
