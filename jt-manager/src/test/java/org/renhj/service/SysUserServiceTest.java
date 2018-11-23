@@ -29,7 +29,8 @@ public class SysUserServiceTest extends TestBase {
         user.setCreatedTime(new Date());
         user.setUpdatedTime(new Date());
 
-        service.saveUser(user);
+        Long[] l1 = new Long[] {1L, 2L};
+        service.saveUser(user, l1);
         System.out.println(user);
     }
 

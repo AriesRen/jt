@@ -1,8 +1,11 @@
 package org.renhj.service;
 
 import org.renhj.common.PageObject;
-import org.renhj.common.Result;
 import org.renhj.entity.SysUser;
+
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 public interface SysUserService {
     /**
@@ -12,14 +15,14 @@ public interface SysUserService {
      * @param pageSize 每页大小
      * @return 分页对象
      */
-    PageObject<SysUser> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
+    Map<?, ?> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize) throws IllegalAccessException, IntrospectionException, InvocationTargetException;
 
     /**
      * 添加用户
      * @param user user对象
      * @return 返回添加后的用户信息
      */
-    SysUser saveUser(SysUser user);
+    Object saveUser(SysUser user, Long[] roleIds);
 
     /**
      * 删除用户
@@ -30,8 +33,8 @@ public interface SysUserService {
 
     /**
      * 通过id查找用户
-     * @param id
-     * @return
+     * @param id id
+     * @return 用户信息
      */
     SysUser findUserById(Long id);
 

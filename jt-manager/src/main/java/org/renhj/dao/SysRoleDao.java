@@ -6,9 +6,9 @@ import org.renhj.entity.SysRole;
 import java.util.List;
 
 public interface SysRoleDao {
-    List<SysRole> findRoleByRoleWithPage(@Param("role")String role,
-                                         @Param("startIndex")Integer startIndex,
-                                         @Param("pageSize")Integer pageSize);
+    List<SysRole> findRolesWithPage(@Param("startIndex")Integer startIndex, @Param("pageSize")Integer pageSize);
+
+    int getRowCount();
 
     int saveRole(SysRole role);
 

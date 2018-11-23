@@ -4,18 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.renhj.dao.SysRoleDao">
 
-    <sql id="whereForRole">
-        <where>
-            <if test="role!=null and role!=''">
-                role like concat("%",#{role},"%")
-            </if>
-        </where>
-    </sql>
-
-    <select id="findRoleByRoleWithPage" resultType="sysRole">
-        select * from sys_roles
-        <include refid="whereForRole"/>
-        order by id
+    <select id="findRolesWithPage" resultType="sysRole">
+        select * from sys_roles order by id
         limit #{startIndex}, #{pageSize}
     </select>
 
@@ -28,5 +18,8 @@
         delete from sys_roles where id = #{id}
     </delete>
 
+    <select id="getRowCount" resultType="int">
+        select count(id) from sys_roles
+    </select>
 
 </mapper>
