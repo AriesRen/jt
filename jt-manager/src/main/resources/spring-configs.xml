@@ -14,10 +14,13 @@
         <mvc:mapping path="/**" allowed-methods="*" allowed-headers="*" allowed-origins="*"/>
     </mvc:cors>
 
+    <!--资源视图解析器-->
     <bean id="viewResovler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".html"/>
     </bean>
+
+    <!--图片上传解析器-->
 
     <import resource="classpath:spring-mybatis.xml"/>
     <import resource="classpath:spring-shiro.xml"/>

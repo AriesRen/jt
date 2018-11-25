@@ -19,7 +19,7 @@ public class SysUserServiceTest extends TestBase {
         SysUserService service = ctx.getBean("sysUserServiceImpl", SysUserService.class);
         SysUser user = new SysUser();
         user.setUsername("renhj");
-        user.setStatus(UserStatus.ACTIVE);
+        user.setStatus(1);
         user.setPassword("123456");
         user.setSalt("123456");
         user.setEmail("renhj@163.com");

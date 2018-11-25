@@ -17,7 +17,7 @@ public class SysUser extends BaseEntity{
     private String username;        // 用户名
     private String password;        // 用户密码
     private String salt;            // 密码加密盐
-    private UserStatus status;      // 账户状态（0 未激活， 1 激活， 2 锁定）
+    private Integer status;      // 账户状态（0 未激活， 1 激活， 2 锁定）
     private String email;           // 邮箱
     private String phone;           // 电话
 }

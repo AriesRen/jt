@@ -18,6 +18,7 @@
         <property name="mapperLocations" value="classpath:mappers/*.xml"/>
         <property name="typeAliasesPackage" value="org.renhj.entity"/>
         <property name="typeHandlersPackage" value="org.renhj.handler"/>
+
     </bean>
     <!--配置Mybatis映射文件扫描配置-->
     <bean id="mybatis" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

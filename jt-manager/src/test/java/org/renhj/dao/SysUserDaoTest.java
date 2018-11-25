@@ -28,7 +28,7 @@ public class SysUserDaoTest extends TestBase {
         SysUserDao dao = ctx.getBean("sysUserDao", SysUserDao.class);
         SysUser user = dao.findUserById(1L);
         System.out.println(user);
-        user.setStatus(UserStatus.ACTIVE);
+        user.setStatus(0);
         user.setUpdatedUser("admin");
         int i = dao.updateUser(user);
         System.out.println(i);

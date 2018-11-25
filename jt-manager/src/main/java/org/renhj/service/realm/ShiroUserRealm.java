@@ -56,10 +56,10 @@ public class ShiroUserRealm extends AuthorizingRealm {
         if (user == null){
             throw new UnknownAccountException("无效的用户名或密码！");
         }
-        if (user.getStatus().getCode() == 0){
+        if (user.getStatus() == 0){
             throw new  DisabledAccountException("账户未激活！");
         }
-        if (user.getStatus().getCode() == 2){
+        if (user.getStatus() == 2){
             throw new LockedAccountException("账户已锁定");
         }
         // 1.3、判断输入的密码和数据库中的密码是否符合
