@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.renhj.common.PageObject;
 import org.renhj.common.Result;
 import org.renhj.entity.SysUser;
+import org.renhj.exception.ResourceNotExistException;
 import org.renhj.service.SysUserService;
 import org.renhj.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,6 @@ public class SysUserController {
     @ResponseBody
     public Result<Object> postUser(@RequestBody Map<String, Object> map){
         System.out.println(map);
-
         System.out.println(map.get("user"));
         SysUser user = JsonUtils.map2Obj((Map<?, ?>) map.get("user"), SysUser.class);
         System.out.println(user);
@@ -69,8 +69,13 @@ public class SysUserController {
 
     @PatchMapping("/{id}")
     @ResponseBody
-    public Result<SysUser> updateUser(@PathVariable("id")Long id, @RequestBody SysUser user){
-        return new Result<SysUser>(200, "update ok", sysUserService.updateUser(user));
+    public Result<?> updateUser(@PathVariable("id")Long id, @RequestBody SysUser user){
+        System.out.println(user);
+        System.out.println(id);
+        SysUser validUser = sysUserService.findUserById(id);
+        validUser.setStatus(user.getStatus());
+        sysUserService.updateUser(validUser);
+        return new Result<>(200, "update ok", "");
     }
 
 }

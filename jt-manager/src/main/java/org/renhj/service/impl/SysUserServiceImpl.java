@@ -4,6 +4,7 @@ import org.renhj.dao.SysUserDao;
 import org.renhj.dao.SysUserRoleDao;
 import org.renhj.entity.SysUser;
 import org.renhj.exception.ResourceNotExistException;
+import org.renhj.exception.ServiceException;
 import org.renhj.service.SysUserService;
 import org.renhj.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.IntrospectionException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @Service
@@ -54,6 +53,12 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @Transactional(readOnly = false)
     public SysUser saveUser(SysUser user, Long[] roleIds) {
+        user.setStatus(0);
+        user.setCreatedTime(new Date());
+        user.setUpdatedTime(user.getCreatedTime());
+        user.setCreatedUser("admin"); //todo:设置为当前登录用户
+        user.setUpdatedUser("admin");
+        user.setSalt(user.getPassword());
         sysUserDao.saveUser(user);
         userRoleDao.insertUserRole(user.getId(), roleIds);
         return user;
@@ -75,8 +80,17 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public SysUser updateUser(SysUser user) {
-        sysUserDao.updateUser(user);
-        return sysUserDao.findUserById(user.getId());
+    @Transactional(readOnly = false)
+    public int updateUser(SysUser user) {
+        // 1、判断权限 只允许admin 和 sysadmin 修改
+        // 3、设置更新用户、时间
+        user.setUpdatedTime(new Date());
+        user.setUpdatedUser("admin");  // TODO:设置为当前登录用户
+        // 4、调用dao更新用户信息
+        int i = sysUserDao.updateUser(user);
+        if (i<1){
+            throw new ServiceException("未知错误！");
+        }
+        return i;
     }
 }

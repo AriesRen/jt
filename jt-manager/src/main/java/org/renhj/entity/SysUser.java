@@ -1,10 +1,12 @@
 package org.renhj.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.renhj.base.BaseEntity;
 import org.renhj.enums.UserStatus;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,7 +17,9 @@ public class SysUser extends BaseEntity{
 
     private Long id;              // ID
     private String username;        // 用户名
+    @JsonIgnore
     private String password;        // 用户密码
+    @JsonIgnore
     private String salt;            // 密码加密盐
     private Integer status;      // 账户状态（0 未激活， 1 激活， 2 锁定）
     private String email;           // 邮箱

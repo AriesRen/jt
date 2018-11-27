@@ -1,6 +1,5 @@
 package org.renhj.service;
 
-import org.renhj.common.PageObject;
 import org.renhj.entity.SysUser;
 
 import java.beans.IntrospectionException;
@@ -43,5 +42,6 @@ public interface SysUserService {
      * @param user 用户信息
      * @return 更新后的用户信息
      */
-    SysUser updateUser(SysUser user);
+    int updateUser(SysUser user);
+
 }

@@ -14,6 +14,7 @@ public class SysMenu extends BaseEntity {
     private String menu;
     private String url;
     private String icon;
-    private String status;
+    private int status;        // 1 上线 2 下线
+    private boolean hidden;   // true 1 不隐藏  false 0 隐藏
     private Integer parentID;
 }
