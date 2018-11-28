@@ -75,6 +75,7 @@
                 <a href="#" class="list-group-item"  id="roleAdd">添加角色</a>
                 <a href="#" class="list-group-item" id="roleList">角色管理</a>
                 <a href="#" class="list-group-item"  id="logsList">日志管理</a>
+                <a href="#" class="list-group-item"  id="menuList">菜单管理</a>
             </div>
         </div>
         <div class="col-md-9" id="content">
@@ -94,17 +95,22 @@
     $(function () {
         $('#roleList').click(function () {
             $(this).siblings().removeClass('active').end().addClass('active');
-            $('#content').load('/role/role_table');
+            $('#content').load('/roleUI');
         });
 
         $('#roleAdd').click(function () {
             $(this).siblings().removeClass('active').end().addClass('active');
-            $('#content').load('/role/addRoleUI');
+            $('#content').load('/addRoleUI');
         });
 
         $('#logsList').click(function () {
             $(this).siblings().removeClass('active').end().addClass('active');
-            $('#content').load('/logs/logsUI');
+            $('#content').load('/logsUI');
+        });
+
+        $('#menuList').click(function () {
+            $(this).siblings().removeClass('active').end().addClass('active');
+            $('#content').load('/menuUI');
         })
     })
 </script>

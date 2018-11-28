@@ -1,0 +1,47 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css">
+
+<div class="panel panel-default">
+    <div class="panel-heading">菜单列表</div>
+    <div class="panel-body" id="content">
+        <table id="tt" class="easyui-treegrid table table-hover">
+            <thead>
+            <tr>
+                <th data-field="selectItem" data-checkbox="true"></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
+
+
+<script>
+
+    var columns = [
+        {field: 'selectItem', radio: true},
+        {field: 'id', title: '菜单ID'},
+        {field: 'menu', title: '菜单名称'},
+        {field: 'url', title: '菜单URL'},
+        {field: 'parentMenu', title: '上级菜单'},
+    ];
+    $(function(){
+        doGetMenu();
+    });
+
+    function doGetMenu() {
+       $('#tt').bootstrapTable({
+           url: '/menus',
+           idFiled: 'id',
+           columns: columns
+       })
+    }
+</script>
+

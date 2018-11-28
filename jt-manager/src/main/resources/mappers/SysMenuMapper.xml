@@ -4,5 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.renhj.dao.SysMenuDao">
 
+    <select id="findAllMenus" resultType="map">
+        select m.*, (select menu from sys_menu p where m.parentId = p.id) as parentMenu from sys_menu m
+    </select>
 
 </mapper>

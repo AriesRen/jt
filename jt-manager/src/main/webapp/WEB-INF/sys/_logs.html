@@ -79,19 +79,20 @@
     }
 
 function getPageLogs() {
-    var url = "/logs/page";
+    var url = "/logs";
     var pageCurrent = $(".pager").data("pageCurrent");
     if (!pageCurrent) pageCurrent=1;
     var params = {"pageCurrent": pageCurrent};
     params.username = $(".input-group >.search").val();
-    $.post(url, params, function (res) {
+    $.get(url, params, function (res) {
         // 设置表格数组，填充到数组
-        doSetLogBody(res.records);
+        doSetLogBody(res.data.records);
         // 设置分页信息
-        doSetPage(res);
+        doSetPage(res.data);
     });
 }
 function doSetPage(res) {
+    console.log(res);
     $(".total").html("<a href=\"#\">总条数("+res.rowCount+")</a>");
     $(".pageSize").html("<a href=\"#\">每页大小("+res.pageSize+")</a>");
     $(".pageCount").html("<a href=\"#\">总页数("+res.pageCount+")</a>");

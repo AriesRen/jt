@@ -57,10 +57,10 @@
 
     function doSetTbody() {
         $.ajax({
-            url: "/role/list",
+            url: "/roles",
             dataType: "json",
-            success: function (data) {
-                doSetTbodyTr(data);
+            success: function (res) {
+                doSetTbodyTr(res.data);
             }
         })
     }
@@ -68,15 +68,15 @@
     function doSetTbodyTr(data) {
         console.log(data);
         var html = "";
-        $.each(data, function (index, column) {
+        $.each(data.records, function (index, column) {
             html += "<tr><td><input type='checkbox' name='checkedId' value='" + column['id'] + "'></td><td>" +
                 column['id'] + "</td><td>" +
-                column['name'] + "</td><td>" +
+                column['role'] + "</td><td>" +
                 column['note'] + "</td><td>" +
-                column['createTime'] + "</td><td>" +
-                column['createUser'] + "</td><td>" +
-                column['updateTime'] + "</td><td>" +
-                column['updateUser'] + "</td></tr>";
+                column['createdTime'] + "</td><td>" +
+                column['createdUser'] + "</td><td>" +
+                column['updatedTime'] + "</td><td>" +
+                column['updatedUser'] + "</td></tr>";
         });
         $('#tbody').html(html)
     }

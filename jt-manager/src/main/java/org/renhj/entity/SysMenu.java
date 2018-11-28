@@ -16,5 +16,8 @@ public class SysMenu extends BaseEntity {
     private String icon;
     private int status;        // 1 上线 2 下线
     private boolean hidden;   // true 1 不隐藏  false 0 隐藏
+    private int sort;           // 排序序号
+    private int type;          // 1 菜单 2 按钮
+    private String note;       // 描述
     private Integer parentID;
 }
