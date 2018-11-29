@@ -1,47 +1,106 @@
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
-<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css">
-
 <div class="panel panel-default">
     <div class="panel-heading">菜单列表</div>
     <div class="panel-body" id="content">
-        <table id="tt" class="easyui-treegrid table table-hover">
-            <thead>
-            <tr>
-                <th data-field="selectItem" data-checkbox="true"></th>
-            </tr>
-            </thead>
+        <div id="toolbar">
+            <button class="btn btn-default btn-delete">删除</button>
+            <button class="btn btn-default btn-new">新建</button>
+        </div>
+        <table class="table table-hover" id="table" data-toolbar="#toolbar" data-search="true">
+
         </table>
     </div>
+
+    <script type="text/javascript">
+        var $table = $('#table');
+        $(function() {
+            $table.bootstrapTable({
+                url: '/menus',
+                height: $(window).height(),
+                striped: true,
+                idField: 'id',
+                columns: [
+                    {
+                        field: 'ck',
+                        checkbox: true
+                    },
+                    {
+                        field: 'id',
+                        title: 'ID',
+                        sortable: true
+                    },
+                    {
+                        field: 'menu',
+                        title: '菜单名称',
+                        aligin: 'center'
+                    },
+                    {
+                        field: 'url',
+                        title: 'URL',
+                        align: 'left'
+                    },
+                    {
+                        field: 'parentMenu',
+                        title: '上级菜单'
+                    },
+                    {
+                        field: 'type',
+                        title: '类型',
+                        align: 'center',
+                        formatter: 'typeFormatter'
+                    },
+                    // {field: 'id', title: '编号', sortable: true, align: 'center'},
+                    // {field: 'pid', title: '所属上级'},
+
+                    {
+                        field: 'status',
+                        title: '状态',
+                        align: 'center',
+                        formatter: 'statusFormatter'
+                    }
+                ],
+                // bootstrap-table-tree-column.js 插件配置
+                // treeShowField: 'name',
+                // parentIdField: 'pid'
+                // bootstrap-table-tree-column.js 插件配置
+                // bootstrap-table-treegrid.js 插件配置
+                treeShowField: 'menu',
+                parentIdField: 'parentId',
+                onLoadSuccess: function(data) {
+                    console.log(data);
+                    // jquery.treegrid.js
+                    $table.treegrid({
+                        initialState: 'collapsed',
+                        treeColumn: 1,
+                        // expanderExpandedClass: 'glyphicon glyphicon-minus',
+                        // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                        onChange: function() {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+                }
+                // bootstrap-table-treetreegrid.js 插件配置
+            });
+        });
+        // 格式化类型
+        function typeFormatter(value, row, index) {
+            if (value === 1) {
+                return '菜单';
+            }
+            if (value === 2) {
+                return '按钮';
+            }
+            if (value === 3) {
+                return '接口';
+            }
+            return '-';
+        }
+        // 格式化状态
+        function statusFormatter(value, row, index) {
+            if (value === 1) {
+                return '<span class="label label-success">正常</span>';
+            } else {
+                return '<span class="label label-default">锁定</span>';
+            }
+        }
+    </script>
 </div>
-
-
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
-
-
-<script>
-
-    var columns = [
-        {field: 'selectItem', radio: true},
-        {field: 'id', title: '菜单ID'},
-        {field: 'menu', title: '菜单名称'},
-        {field: 'url', title: '菜单URL'},
-        {field: 'parentMenu', title: '上级菜单'},
-    ];
-    $(function(){
-        doGetMenu();
-    });
-
-    function doGetMenu() {
-       $('#tt').bootstrapTable({
-           url: '/menus',
-           idFiled: 'id',
-           columns: columns
-       })
-    }
-</script>
-
