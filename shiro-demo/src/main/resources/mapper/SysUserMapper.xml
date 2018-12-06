@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renhj.shiro.mapper.SysUserMapper">
+
+
+    <select id="findAllUser" resultType="sysUser">
+        select * from sys_users
+    </select>
+
+    <select id="findUserByUsername" resultType="sysUser">
+        select * from sys_users where username = #{username}
+    </select>
+
+    <select id="findUserById" resultType="sysUser">
+        select * from sys_users where id=#{id}
+    </select>
+
+    <insert id="addUser" parameterType="sysUser" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_users(id, username, password, salt, email, phone, status, createdTime, createdUser, updatedTime, updatedUser)
+        values (null, #{username}, #{password}, #{salt}, #{email}, #{phone}, #{status}, #{createdTime}, #{createdUser}, #{updatedTime}, #{updatedUser})
+    </insert>
+
+</mapper>
