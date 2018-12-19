@@ -11,6 +11,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -24,35 +25,34 @@ public class AuthController {
     private SysUserMapper userMapper;
 
     @RequestMapping("login")
-    public String loginUI(){
+    public String loginUI() {
         return "login";
     }
 
     @RequestMapping("doLogin")
     @ResponseBody
-    public Result doLogin(String username, String password){
-        System.out.println(username + "  " + password);
-        AuthenticationToken token = new UsernamePasswordToken(username,password);
+    public Result doLogin(String username, String password) {
+        AuthenticationToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
-        return new Result(200,"success", subject.getSession());
+        return new Result(200, "success", subject.getSession());
     }
 
     @RequestMapping("unauth")
     @ResponseBody
-    public Result unauth(){
-        return new Result(401, "未登录",null);
+    public Result unauth() {
+        return new Result(401, "未登录", null);
     }
 
     @RequestMapping("register")
-    public String register(){
+    public String register() {
         return "register";
     }
 
-    @RequestMapping("doRegister")
+    @RequestMapping(value = "doRegister", method = RequestMethod.POST)
     @ResponseBody
-    public Result doRegister(SysUser user){
-        return new Result(201, "register success" ,userMapper.findUserById(userService.registerUser(user)));
+    public Result doRegister(SysUser user) {
+        return new Result(201, "register success", userMapper.findUserById(userService.registerUser(user)));
     }
 
 }

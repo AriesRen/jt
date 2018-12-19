@@ -28,7 +28,7 @@ public class SysUserServiceImpl implements SysUserService {
     public Long registerUser(SysUser user) {
         // 判断是否存在同名用户
         SysUser su = userMapper.findUserByUsername(user.getUsername());
-        if (su!=null) throw new AuthenticationException("该用户已存在！");
+        if (su != null) throw new AuthenticationException("该用户已存在！");
 
         String salt = UUID.randomUUID().toString().replace("-", "");
         user.setPassword(new SimpleHash("MD5", user.getPassword(), salt, 2).toHex());
@@ -40,7 +40,7 @@ public class SysUserServiceImpl implements SysUserService {
         user.setUpdatedUser("admin");
 
         int i = userMapper.addUser(user);
-        if (i!=1) throw new RuntimeException("未知错误！");
+        if (i != 1) throw new RuntimeException("未知错误！");
         return user.getId();
     }
 }

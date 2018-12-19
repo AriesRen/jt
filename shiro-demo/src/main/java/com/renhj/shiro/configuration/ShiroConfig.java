@@ -26,7 +26,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SysUserRealm sysUserRealm(){
+    public SysUserRealm sysUserRealm() {
         SysUserRealm realm = new SysUserRealm();
         realm.setCredentialsMatcher(hashedCredentialsMatcher());
         return realm;
@@ -34,7 +34,7 @@ public class ShiroConfig {
 
 
     @Bean
-    public SecurityManager securityManager(){
+    public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(sysUserRealm());
         return securityManager;
@@ -42,7 +42,7 @@ public class ShiroConfig {
 
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager manager){
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager manager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(manager);
 

@@ -12,7 +12,8 @@ public class Result implements Serializable {
     private String m = "success";
     private Object d;
 
-    public Result() {}
+    public Result() {
+    }
 
     public Result(Integer c, java.lang.String m, Object d) {
         this.c = c;

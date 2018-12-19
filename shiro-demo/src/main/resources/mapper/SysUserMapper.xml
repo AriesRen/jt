@@ -17,8 +17,10 @@
     </select>
 
     <insert id="addUser" parameterType="sysUser" keyProperty="id" useGeneratedKeys="true">
-        insert into sys_users(id, username, password, salt, email, phone, status, createdTime, createdUser, updatedTime, updatedUser)
-        values (null, #{username}, #{password}, #{salt}, #{email}, #{phone}, #{status}, #{createdTime}, #{createdUser}, #{updatedTime}, #{updatedUser})
+        insert into sys_users(id, username, password, salt, email, phone, status, createdTime, createdUser, updatedTime,
+        updatedUser)
+        values (null, #{username}, #{password}, #{salt}, #{email}, #{phone}, #{status}, #{createdTime}, #{createdUser},
+        #{updatedTime}, #{updatedUser})
     </insert>
 
 </mapper>

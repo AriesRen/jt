@@ -16,7 +16,7 @@ public class UserController {
     private SysUserService userService;
 
     @GetMapping("")
-    public Result users(){
+    public Result users() {
         return new Result(userService.findAllUser());
     }
 

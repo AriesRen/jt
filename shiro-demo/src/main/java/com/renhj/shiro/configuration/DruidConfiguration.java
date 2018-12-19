@@ -13,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 
+
 @Configuration
 @PropertySource(value = "classpath:druid.properties")
 public class DruidConfiguration {
@@ -20,13 +21,13 @@ public class DruidConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     @Primary
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return new DruidDataSource();
     }
 
 
     @Bean
-    public ServletRegistrationBean<StatViewServlet> druidServelt(){
+    public ServletRegistrationBean<StatViewServlet> druidServelt() {
         ServletRegistrationBean<StatViewServlet> regBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
         regBean.addInitParameter("allow", "127.0.0.1");
         regBean.addInitParameter("loginUsername", "admin");
@@ -36,7 +37,7 @@ public class DruidConfiguration {
     }
 
     @Bean
-    public FilterRegistrationBean<WebStatFilter> druidFilter(){
+    public FilterRegistrationBean<WebStatFilter> druidFilter() {
         FilterRegistrationBean<WebStatFilter> regBean = new FilterRegistrationBean<>(new WebStatFilter());
         regBean.addUrlPatterns("/*");
         regBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
