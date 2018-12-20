@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.renhj.manager.mapper.StudentSectionMapper" >
+  <resultMap id="BaseResultMap" type="org.renhj.manager.pojo.domain.StudentSection" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="section_id" property="sectionId" jdbcType="INTEGER" />
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="duration" property="duration" jdbcType="VARCHAR" />
+    <result column="is_free" property="isFree" jdbcType="CHAR" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

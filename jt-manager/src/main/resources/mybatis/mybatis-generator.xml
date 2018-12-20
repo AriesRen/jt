@@ -26,7 +26,10 @@
 
         <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
-        <table tableName="%" >
+        <table tableName="%"  enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

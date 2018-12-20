@@ -6,15 +6,9 @@
 
     <mvc:annotation-driven>
         <!--使用fastjson进行json的转换-->
-        <mvc:message-converters>
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>application/json</value>
-                    </list>
-                </property>
-            </bean>
-        </mvc:message-converters>
+        <!--<mvc:message-converters>-->
+            <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>-->
+        <!--</mvc:message-converters>-->
     </mvc:annotation-driven>
     <!--扫描mvc controller-->
     <context:component-scan base-package="org.renhj.manager.controller"/>

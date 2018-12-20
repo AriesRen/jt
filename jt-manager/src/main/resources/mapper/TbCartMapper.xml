@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.renhj.manager.mapper.TbCartMapper" >
+  <resultMap id="BaseResultMap" type="org.renhj.manager.pojo.domain.TbCart" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="item_id" property="itemId" jdbcType="BIGINT" />
+    <result column="item_title" property="itemTitle" jdbcType="VARCHAR" />
+    <result column="item_image" property="itemImage" jdbcType="VARCHAR" />
+    <result column="item_price" property="itemPrice" jdbcType="BIGINT" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
