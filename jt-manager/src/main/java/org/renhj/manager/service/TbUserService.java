@@ -16,4 +16,5 @@ public interface TbUserService {
      */
     Page<?> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
 
+    Integer saveUser(TbUser user);
 }
