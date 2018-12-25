@@ -7,6 +7,7 @@ import org.renhj.manager.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,6 +22,24 @@ public class TbUserServiceImpl implements TbUserService {
         List<?> list = userMapper.selectUsersByUsernameWithPage(username, (pageCurrent-1)*pageSize, pageSize);
         Integer pageCount = (total-1)/pageSize + 1;
         return new Page<>(total,pageSize,pageCurrent,pageCount,list);
+    }
+
+    @Override
+    public TbUser saveUser(TbUser user) {
+        // 添加用户
+        user.setCreated(new Date());
+        user.setUpdated(user.getCreated());
+        Simple
+    }
+
+    @Override
+    public Long deleteUserById(String id) {
+        return null;
+    }
+
+    @Override
+    public TbUser updateUser(TbUser user) {
+        return null;
     }
 
 }

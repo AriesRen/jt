@@ -16,4 +16,9 @@ public interface TbUserService {
      */
     Page<?> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
 
+    TbUser saveUser(TbUser user);
+
+    Long deleteUserById(String id);
+
+    TbUser updateUser(TbUser user);
 }
