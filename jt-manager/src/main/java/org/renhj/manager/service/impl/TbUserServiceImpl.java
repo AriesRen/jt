@@ -25,11 +25,12 @@ public class TbUserServiceImpl implements TbUserService {
     }
 
     @Override
-    public TbUser saveUser(TbUser user) {
+    public int saveUser(TbUser user) {
         // 添加用户
         user.setCreated(new Date());
         user.setUpdated(user.getCreated());
-        Simple
+
+        return userMapper.insert(user);
     }
 
     @Override

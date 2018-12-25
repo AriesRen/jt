@@ -3,8 +3,6 @@ package org.renhj.manager.service;
 import org.renhj.common.pojo.vo.Page;
 import org.renhj.manager.pojo.domain.TbUser;
 
-import java.util.List;
-
 public interface TbUserService {
 
     /**
@@ -16,7 +14,7 @@ public interface TbUserService {
      */
     Page<?> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
 
-    TbUser saveUser(TbUser user);
+    int saveUser(TbUser user);
 
     Long deleteUserById(String id);
 
