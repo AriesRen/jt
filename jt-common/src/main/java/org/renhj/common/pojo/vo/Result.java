@@ -16,10 +16,16 @@ public class Result implements Serializable {
     private String m;
     private Object d;
 
+    public Result(int c, String m){
+        this.c = c;
+        this.m = m;
+    }
+
     public static Result build(int c, String m, Object d){
         return new Result(c, m, d);
     }
     public static Result ok(Object d){
         return new Result(200,"ok", d);
     }
+    public static Result ok(){return new Result(200, "success");}
 }
