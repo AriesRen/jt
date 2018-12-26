@@ -18,11 +18,11 @@ public class TbUserServiceImpl implements TbUserService {
     private TbUserMapper userMapper;
 
 
-    public Page<?> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize) {
+    public Page findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize) {
         Integer total = userMapper.selectTotalByUsername(username);
         List<?> list = userMapper.selectUsersByUsernameWithPage(username, (pageCurrent-1)*pageSize, pageSize);
         Integer pageCount = (total-1)/pageSize + 1;
-        return new Page<>(total,pageSize,pageCurrent,pageCount,list);
+        return new Page(total,pageSize,pageCurrent,pageCount,list);
     }
 
     public int saveUser(TbUser user) {

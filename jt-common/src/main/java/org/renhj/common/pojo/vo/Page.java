@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Page<E> {
+public class Page {
     private Integer total;
     private Integer size;
     private Integer current;
     private Integer page;
-    private List<E> records;
+    private List<?> records;
 }

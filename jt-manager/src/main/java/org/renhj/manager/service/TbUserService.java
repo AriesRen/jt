@@ -12,7 +12,7 @@ public interface TbUserService {
      * @param pageSize 每页大小
      * @return user的集合
      */
-    Page<?> findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
+    Page findUsersByUsernameWithPage(String username, Integer pageCurrent, Integer pageSize);
 
     int saveUser(TbUser user);
 
