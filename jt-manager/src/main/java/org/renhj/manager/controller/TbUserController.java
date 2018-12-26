@@ -34,4 +34,9 @@ public class TbUserController {
     public Result updateUser(@RequestBody TbUser user){
         return Result.build(200, "update ok", userService.updateUser(user));
     }
+
+    @PatchMapping("/{id}")
+    public Result patchUser(@RequestBody TbUser user){
+        return Result.build(200, "patch ok", userService.updateUser(user));
+    }
 }
