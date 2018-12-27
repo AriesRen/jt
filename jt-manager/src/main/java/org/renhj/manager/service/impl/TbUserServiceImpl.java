@@ -41,13 +41,26 @@ public class TbUserServiceImpl implements TbUserService {
         return userMapper.insert(user);
     }
 
-    public Long deleteUserById(String id) {
-        return null;
+    public int deleteUserById(String id) {
+        TbUser user = userMapper.selectByPrimaryKey(id);
+        if (user == null){
+            throw new ServiceException("Not Found this user");
+        }
+        return userMapper.delete(user);
     }
 
 
-    public TbUser updateUser(TbUser user) {
-        return null;
+    public int updateUser(TbUser user) {
+        TbUser tbUser = userMapper.selectOne(user);
+        if (tbUser == null){
+            throw new ServiceException("Not Found this user");
+        }
+        return userMapper.updateByPrimaryKey(tbUser);
+    }
+
+    @Override
+    public TbUser findUserById(String id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
 }

@@ -10,4 +10,12 @@
     <result column="book_num" property="bookNum" jdbcType="INTEGER" />
     <result column="video_num" property="videoNum" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="selectTotal" resultType="Integer">
+    select count(id) from tb_book
+  </select>
+
+  <select id="selectBookWithPage" resultMap="BaseResultMap">
+    select * from tb_book limit #{start}, #{size}
+  </select>
 </mapper>

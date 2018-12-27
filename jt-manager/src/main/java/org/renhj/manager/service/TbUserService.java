@@ -16,7 +16,9 @@ public interface TbUserService {
 
     int saveUser(TbUser user);
 
-    Long deleteUserById(String id);
+    int deleteUserById(String id);
 
-    TbUser updateUser(TbUser user);
+    int updateUser(TbUser user);
+
+    TbUser findUserById(String id);
 }

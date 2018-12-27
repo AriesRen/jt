@@ -9,14 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/items")
 public class TbItemController {
     @Autowired
     private TbItemService itemService;
 
     @GetMapping
-    public Result items(@RequestParam("pageCurrent")Integer pageCurrent,
-                        @RequestParam("pageSize")Integer pageSize){
+    public Result items(@RequestParam(value = "pageCurrent", defaultValue = "1")Integer pageCurrent,
+                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
         return Result.ok(itemService.findItemWithPage(pageCurrent, pageSize));
     }
 
@@ -33,5 +33,10 @@ public class TbItemController {
     @PostMapping("/{id}")
     public Result updateItem(@PathVariable Long id,@RequestBody TbItem item){
         return Result.build(200, "update ok", itemService.updateItem(item));
+    }
+
+    @DeleteMapping("/{id}")
+    public Result deleteItem(@PathVariable String id){
+        return Result.ok(itemService.deleteItemById(id));
     }
 }

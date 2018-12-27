@@ -25,6 +25,16 @@ public class TbUserController {
         return Result.build(201, "save ok", userService.saveUser(user));
     }
 
+    @GetMapping("/{id}")
+    public Result getUser(@PathVariable String id){
+        return Result.ok(userService.findUserById(id));
+    }
+
+    @PostMapping("/{id}")
+    public Result updateUser(@PathVariable long id, @RequestBody TbUser user){
+        return Result.ok(userService.updateUser(user));
+    }
+
     @DeleteMapping("/{id}")
     public Result deleteUser(@PathVariable String id){
         return Result.build(200, "delete ok", userService.deleteUserById(id));
