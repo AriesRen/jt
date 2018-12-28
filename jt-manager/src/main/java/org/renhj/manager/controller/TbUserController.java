@@ -31,7 +31,7 @@ public class TbUserController {
     }
 
     @DeleteMapping("/{id}")
-    public Result deleteUser(@PathVariable String id){
+    public Result deleteUser(@PathVariable Long id){
         return Result.build(200, "delete ok", userService.deleteUserById(id));
     }
 
