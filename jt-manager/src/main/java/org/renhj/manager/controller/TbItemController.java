@@ -1,11 +1,9 @@
 package org.renhj.manager.controller;
 
-import com.sun.prism.shader.Mask_TextureSuper_AlphaTest_Loader;
 import org.renhj.common.pojo.vo.Result;
 import org.renhj.manager.pojo.domain.TbItem;
 import org.renhj.manager.service.TbItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
