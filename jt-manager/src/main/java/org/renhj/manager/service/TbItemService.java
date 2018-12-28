@@ -8,9 +8,11 @@ public interface TbItemService {
 
     int saveItem(TbItem item);
 
-    int deleteItemById(String id);
+    int deleteItemById(Long id);
 
     int updateItem(TbItem item);
 
     TbItem findItemById(Long id);
+
+    int patchItem(Long id, TbItem item);
 }

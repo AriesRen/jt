@@ -8,6 +8,7 @@ import org.renhj.manager.service.TbItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,11 +25,14 @@ public class TbItemServiceImpl implements TbItemService {
 
     @Override
     public int saveItem(TbItem item) {
+        item.setCreated(new Date());
+        item.setUpdated(item.getCreated());
+        item.setStatus(1);
         return itemMapper.insert(item);
     }
 
     @Override
-    public int deleteItemById(String id) {
+    public int deleteItemById(Long id) {
         TbItem item = itemMapper.selectByPrimaryKey(id);
         if (item == null){
             throw new ServiceException("Not Found this item!");
@@ -38,8 +42,7 @@ public class TbItemServiceImpl implements TbItemService {
 
     @Override
     public int updateItem(TbItem item) {
-        TbItem ti = itemMapper.selectOne(item);
-        if (item == null) {
+        if (itemMapper.selectOne(item) == null) {
             throw new ServiceException("Not Found this item!");
         }
         return itemMapper.updateByPrimaryKey(item);
@@ -50,5 +53,13 @@ public class TbItemServiceImpl implements TbItemService {
         return itemMapper.selectByPrimaryKey(id);
     }
 
-
+    @Override
+    public int patchItem(Long id, TbItem item) {
+        if (itemMapper.selectByPrimaryKey(id) == null){
+            throw new ServiceException("Not Found This Item!");
+        }
+        item.setId(id);
+        item.setUpdated(new Date());
+        return itemMapper.updateByPrimaryKeySelective(item);
+    }
 }

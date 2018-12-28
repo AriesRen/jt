@@ -51,7 +51,7 @@ public class TbItem {
     /**
      * 商品状态，1-正常，2-下架，3-删除
      */
-    private Byte status;
+    private Integer status;
 
     /**
      * 创建时间
@@ -212,7 +212,7 @@ public class TbItem {
      *
      * @return status - 商品状态，1-正常，2-下架，3-删除
      */
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
@@ -221,7 +221,7 @@ public class TbItem {
      *
      * @param status 商品状态，1-正常，2-下架，3-删除
      */
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

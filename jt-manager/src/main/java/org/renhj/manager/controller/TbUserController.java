@@ -13,7 +13,7 @@ public class TbUserController {
     @Autowired
     private TbUserService userService;
 
-    @GetMapping("")
+    @GetMapping
     public Result users(@RequestParam(value = "pageCurrent", defaultValue = "1")Integer pageCurrent,
                         @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                         @RequestParam(value = "username", defaultValue = "")String username){
@@ -23,6 +23,11 @@ public class TbUserController {
     @PostMapping
     public Result addUsers(@RequestBody TbUser user){
         return Result.build(201, "save ok", userService.saveUser(user));
+    }
+
+    @GetMapping("/{id}")
+    public Result getUser(@PathVariable Long id){
+        return Result.ok(userService.findUserById(id));
     }
 
     @DeleteMapping("/{id}")
