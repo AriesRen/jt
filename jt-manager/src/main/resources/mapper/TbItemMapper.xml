@@ -17,4 +17,12 @@
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="selectTotal" resultType="int">
+    select count(id) from tb_item;
+  </select>
+
+  <select id="selectItemWithPage" resultType="TbItem">
+    select * from tb_item order by created desc limit #{start}, #{size}
+  </select>
 </mapper>

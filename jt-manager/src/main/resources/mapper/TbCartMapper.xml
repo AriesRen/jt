@@ -15,4 +15,12 @@
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="selectTotal" resultType="Integer">
+    select count(id) from tb_cart
+  </select>
+
+  <select id="selectCartWithPage" resultMap="BaseResultMap">
+    select * from tb_cart order by created desc limit #{start}, #{size}
+  </select>
 </mapper>
