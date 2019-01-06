@@ -2,10 +2,15 @@ package org.renhj.manager.controller;
 
 
 import org.renhj.common.pojo.vo.Result;
+import org.renhj.common.utils.convert.MapObjectConvert;
 import org.renhj.manager.pojo.domain.TbUser;
 import org.renhj.manager.service.TbUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -43,5 +48,22 @@ public class TbUserController {
     @PatchMapping("/{id}")
     public Result patchUser(@RequestBody TbUser user) {
         return Result.build(200, "patch ok", userService.updateUser(user));
+    }
+
+    @GetMapping("/info")
+    public Result userInfo(@RequestParam String token){
+        Map<String, Object> map = null;
+        try {
+            map = MapObjectConvert.object2Map(userService.findUserById(1L));
+            List<String> roles = new ArrayList<>();
+            roles.add("admin");
+            roles.add("editor");
+            roles.add("system");
+            map.put("roles", roles);
+            return Result.ok(map);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return Result.build(401, "获取用户信息失败！", "");
+        }
     }
 }

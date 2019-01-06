@@ -1,10 +1,12 @@
 package org.renhj.manager.pojo.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "tb_user")
-public class TbUser {
+public class TbUser implements Serializable {
+    private static final long serialVersionUID = 7919902286077119614L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
