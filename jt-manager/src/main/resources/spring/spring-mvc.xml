@@ -11,7 +11,11 @@
         <!--</mvc:message-converters>-->
     </mvc:annotation-driven>
     <mvc:cors>
-        <mvc:mapping path="/**"/>
+        <mvc:mapping path="/**"
+            allowed-origins="*"
+            allowed-methods="GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD"
+            allowed-headers="*"
+            allow-credentials="false"/>
     </mvc:cors>
     <!--扫描mvc controller-->
     <context:component-scan base-package="org.renhj.manager.controller"/>
