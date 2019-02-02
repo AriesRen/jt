@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequestMapping("/auth")
 public class AuthController {
     @PostMapping("/login")
-    public Result doLogin(@RequestBody TbUser user){
+    public Result doLogin(@RequestBody(required = true) TbUser user){
         System.out.println(user);
         Map<String, String> map = new HashMap<>();
         String token = String.valueOf(UUID.randomUUID());
