@@ -47,7 +47,7 @@ public class ImageServiceImpl implements ImageService {
         }
         // 4、准备存储路径
         String imageDir = new SimpleDateFormat("/yyyy/MM/dd/HH/mm/").format(new Date());
-        String imageName = String.valueOf(UUID.randomUUID()) + fileSuffix;
+        String imageName = String.valueOf(UUID.randomUUID()).replace("-", "") + "." +  fileSuffix;
         String imagePath = root + imageDir + imageName;
 
         // 6、写入文件
@@ -77,6 +77,13 @@ public class ImageServiceImpl implements ImageService {
         return result;
     }
 
+    @Override
+    public void deleteImages(String urls) {
+        // urls: https://url/2019/02/01/adsfeovlknfvnjfanfvj.jpg,https://url/2019/02/01/adsfeovlknfvnjfanfvj.jpg
+        String[] s = urls.split(",");
+        System.out.println(Arrays.toString(s));
+    }
+
     private boolean isImage(MultipartFile image) {
         if (image == null) {
             return false;
@@ -87,7 +94,6 @@ public class ImageServiceImpl implements ImageService {
             if (fileName != null) {
                 fileSuffix = fileName.substring(fileName.lastIndexOf(".") + 1);
             }
-            System.out.println(fileSuffix);
             if (list.contains(fileSuffix)) {
                 return false;
             }

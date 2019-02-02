@@ -6,4 +6,6 @@ import java.util.HashMap;
 
 public interface ImageService {
     HashMap addImage(MultipartFile image);
+
+    void deleteImages(String urls);
 }

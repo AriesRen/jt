@@ -11,8 +11,12 @@ import java.util.List;
 
 @Service
 public class TbCartServiceImpl implements TbCartService {
+    private final TbCartMapper cartMapper;
+
     @Autowired
-    private TbCartMapper cartMapper;
+    public TbCartServiceImpl(TbCartMapper cartMapper) {
+        this.cartMapper = cartMapper;
+    }
 
     @Override
     public Page findCartsWithPage(Integer pageCurrent, Integer pageSize) {

@@ -12,8 +12,12 @@ import java.util.List;
 
 @Service
 public class TbBookServiceImpl implements TbBookService {
+    private final TbBookMapper bookMapper;
+
     @Autowired
-    private TbBookMapper bookMapper;
+    public TbBookServiceImpl(TbBookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+    }
 
     @Override
     public Page findBooksWithPage(Integer pageCurrent, Integer pageSize) {
