@@ -10,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/images")
+@CrossOrigin(origins = "*")
 public class ImageController {
     private final ImageService imageService;
 

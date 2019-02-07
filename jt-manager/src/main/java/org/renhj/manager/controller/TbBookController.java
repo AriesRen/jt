@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/books")
+@CrossOrigin(origins = "*")
 public class TbBookController {
     @Autowired
     private TbBookService bookService;
