@@ -27,27 +27,54 @@ public class TbUserController {
 
     @PostMapping
     public Result addUsers(@RequestBody TbUser user) {
-        return Result.build(201, "save ok", userService.saveUser(user));
+        return Result.build(200, "save ok", userService.saveUser(user));
     }
 
+    /**
+     * 通过ID获取用户信息
+     * @param id 用户ID
+     * @return 用户信息
+     */
     @GetMapping("/{id}")
     public Result getUser(@PathVariable Long id) {
         return Result.ok(userService.findUserById(id));
     }
 
+    @GetMapping("/isExistUser")
+    public Result getUserByUsername(String username){
+        return Result.ok(userService.findUserByUsername(username));
+    }
+
+    /**
+     * 删除用户
+     * @param id 用户ID
+     * @return 是否成功
+     */
     @DeleteMapping("/{id}")
     public Result deleteUser(@PathVariable Long id) {
         return Result.build(200, "delete ok", userService.deleteUserById(id));
     }
 
+    /**
+     * 修改用户信息  冥等
+     * @param user 修改用户的所有信息
+     * @return 是否修改成功
+     */
     @PutMapping("/{id}")
     public Result updateUser(@RequestBody TbUser user) {
         return Result.build(200, "update ok", userService.updateUser(user));
     }
 
+    /**
+     * 修改用户信息 非冥等
+     * @param user 用户信息 通过spinrg获取需要修改的用户信息，构造user对象
+     * @return 是否修改成功
+     */
     @PatchMapping("/{id}")
-    public Result patchUser(@RequestBody TbUser user) {
-        return Result.build(200, "patch ok", userService.updateUser(user));
+    public Result patchUser(@RequestBody TbUser user, @PathVariable("id") Long userId) {
+        user.setId(userId);
+        System.out.println(user);
+        return Result.build(200, "patch ok", userService.patchUser(userId, user));
     }
 
     @GetMapping("/info")

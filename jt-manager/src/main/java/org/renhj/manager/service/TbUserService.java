@@ -21,5 +21,9 @@ public interface TbUserService {
 
     int updateUser(TbUser user);
 
+    int patchUser(Long id, TbUser user);
+
     TbUser findUserById(Long id);
+
+    Boolean findUserByUsername(String username);
 }

@@ -16,6 +16,7 @@
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
 
+
   <select id="selectTotal" resultType="Integer">
     select count(id) from tb_cart
   </select>

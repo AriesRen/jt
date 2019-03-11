@@ -1,47 +1,45 @@
 package org.renhj.manager.pojo.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "tb_order")
 public class TbOrder {
     /**
-     * 订单id
+     * 订单号
      */
+    @Id
     @Column(name = "order_id")
     private String orderId;
 
     /**
-     * 实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * 用户id
      */
-    private String payment;
+    @Column(name = "user_id")
+    private Long userId;
 
     /**
-     * 支付类型，1、在线支付，2、货到付款
+     * 实付金额
+     */
+    private BigDecimal payment;
+
+    /**
+     * 付款类型
      */
     @Column(name = "payment_type")
     private Integer paymentType;
 
     /**
-     * 邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * 邮费
      */
     @Column(name = "post_fee")
-    private String postFee;
+    private BigDecimal postFee;
 
     /**
-     * 状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
+     * 状态码
      */
     private Integer status;
-
-    /**
-     * 订单创建时间
-     */
-    private Date created;
-
-    /**
-     * 订单更新时间
-     */
-    private Date updated;
 
     /**
      * 付款时间
@@ -80,153 +78,141 @@ public class TbOrder {
     private String shippingCode;
 
     /**
-     * 用户id
-     */
-    @Column(name = "user_id")
-    private Long userId;
-
-    /**
      * 买家留言
      */
     @Column(name = "buyer_message")
     private String buyerMessage;
 
     /**
-     * 买家昵称
+     * 卖家昵称
      */
     @Column(name = "buyer_nick")
     private String buyerNick;
 
     /**
-     * 买家是否已经评价
+     * 是否已评价
      */
     @Column(name = "buyer_rate")
     private Integer buyerRate;
 
     /**
-     * 获取订单id
+     * 创建时间
+     */
+    @Column(name = "create_time")
+    private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    @Column(name = "update_time")
+    private Date updateTime;
+
+    /**
+     * 获取订单号
      *
-     * @return order_id - 订单id
+     * @return order_id - 订单号
      */
     public String getOrderId() {
         return orderId;
     }
 
     /**
-     * 设置订单id
+     * 设置订单号
      *
-     * @param orderId 订单id
+     * @param orderId 订单号
      */
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
     /**
-     * 获取实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * 获取用户id
      *
-     * @return payment - 实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * @return user_id - 用户id
      */
-    public String getPayment() {
+    public Long getUserId() {
+        return userId;
+    }
+
+    /**
+     * 设置用户id
+     *
+     * @param userId 用户id
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * 获取实付金额
+     *
+     * @return payment - 实付金额
+     */
+    public BigDecimal getPayment() {
         return payment;
     }
 
     /**
-     * 设置实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * 设置实付金额
      *
-     * @param payment 实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * @param payment 实付金额
      */
-    public void setPayment(String payment) {
+    public void setPayment(BigDecimal payment) {
         this.payment = payment;
     }
 
     /**
-     * 获取支付类型，1、在线支付，2、货到付款
+     * 获取付款类型
      *
-     * @return payment_type - 支付类型，1、在线支付，2、货到付款
+     * @return payment_type - 付款类型
      */
     public Integer getPaymentType() {
         return paymentType;
     }
 
     /**
-     * 设置支付类型，1、在线支付，2、货到付款
+     * 设置付款类型
      *
-     * @param paymentType 支付类型，1、在线支付，2、货到付款
+     * @param paymentType 付款类型
      */
     public void setPaymentType(Integer paymentType) {
         this.paymentType = paymentType;
     }
 
     /**
-     * 获取邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * 获取邮费
      *
-     * @return post_fee - 邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * @return post_fee - 邮费
      */
-    public String getPostFee() {
+    public BigDecimal getPostFee() {
         return postFee;
     }
 
     /**
-     * 设置邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * 设置邮费
      *
-     * @param postFee 邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分
+     * @param postFee 邮费
      */
-    public void setPostFee(String postFee) {
+    public void setPostFee(BigDecimal postFee) {
         this.postFee = postFee;
     }
 
     /**
-     * 获取状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
+     * 获取状态码
      *
-     * @return status - 状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
+     * @return status - 状态码
      */
     public Integer getStatus() {
         return status;
     }
 
     /**
-     * 设置状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
+     * 设置状态码
      *
-     * @param status 状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
+     * @param status 状态码
      */
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    /**
-     * 获取订单创建时间
-     *
-     * @return created - 订单创建时间
-     */
-    public Date getCreated() {
-        return created;
-    }
-
-    /**
-     * 设置订单创建时间
-     *
-     * @param created 订单创建时间
-     */
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    /**
-     * 获取订单更新时间
-     *
-     * @return updated - 订单更新时间
-     */
-    public Date getUpdated() {
-        return updated;
-    }
-
-    /**
-     * 设置订单更新时间
-     *
-     * @param updated 订单更新时间
-     */
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 
     /**
@@ -338,24 +324,6 @@ public class TbOrder {
     }
 
     /**
-     * 获取用户id
-     *
-     * @return user_id - 用户id
-     */
-    public Long getUserId() {
-        return userId;
-    }
-
-    /**
-     * 设置用户id
-     *
-     * @param userId 用户id
-     */
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    /**
      * 获取买家留言
      *
      * @return buyer_message - 买家留言
@@ -374,38 +342,74 @@ public class TbOrder {
     }
 
     /**
-     * 获取买家昵称
+     * 获取卖家昵称
      *
-     * @return buyer_nick - 买家昵称
+     * @return buyer_nick - 卖家昵称
      */
     public String getBuyerNick() {
         return buyerNick;
     }
 
     /**
-     * 设置买家昵称
+     * 设置卖家昵称
      *
-     * @param buyerNick 买家昵称
+     * @param buyerNick 卖家昵称
      */
     public void setBuyerNick(String buyerNick) {
         this.buyerNick = buyerNick;
     }
 
     /**
-     * 获取买家是否已经评价
+     * 获取是否已评价
      *
-     * @return buyer_rate - 买家是否已经评价
+     * @return buyer_rate - 是否已评价
      */
     public Integer getBuyerRate() {
         return buyerRate;
     }
 
     /**
-     * 设置买家是否已经评价
+     * 设置是否已评价
      *
-     * @param buyerRate 买家是否已经评价
+     * @param buyerRate 是否已评价
      */
     public void setBuyerRate(Integer buyerRate) {
         this.buyerRate = buyerRate;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return create_time - 创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取修改时间
+     *
+     * @return update_time - 修改时间
+     */
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    /**
+     * 设置修改时间
+     *
+     * @param updateTime 修改时间
+     */
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

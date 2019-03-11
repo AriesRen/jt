@@ -12,6 +12,7 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
 
   <sql id="usernameLike">
@@ -27,9 +28,13 @@
     <include refid="usernameLike"/>
   </select>
   <select id="selectUsersByUsernameWithPage" resultMap="BaseResultMap">
-    select id, username, password, phone, email, created, updated from tb_user
+    select id, username, password, phone, email, status, created, updated from tb_user
     <include refid="usernameLike"/>
     order by id
     limit #{start}, #{size}
+  </select>
+  <select id="selectOneByUsername" resultMap="BaseResultMap">
+    select id, username, password, phone, email, status, created, updated from tb_user
+    where username = #{username} limit 1
   </select>
 </mapper>

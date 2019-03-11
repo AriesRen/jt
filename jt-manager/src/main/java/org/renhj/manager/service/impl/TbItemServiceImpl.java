@@ -27,7 +27,6 @@ public class TbItemServiceImpl implements TbItemService {
     public int saveItem(TbItem item) {
         item.setCreated(new Date());
         item.setUpdated(item.getCreated());
-        item.setStatus(1);
         return itemMapper.insert(item);
     }
 

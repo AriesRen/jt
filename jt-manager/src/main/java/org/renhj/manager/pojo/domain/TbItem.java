@@ -1,9 +1,12 @@
 package org.renhj.manager.pojo.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "tb_item")
+@Data
 public class TbItem {
     /**
      * 商品id，同时也是商品编号
@@ -51,7 +54,7 @@ public class TbItem {
     /**
      * 商品状态，1-正常，2-下架，3-删除
      */
-    private Integer status;
+    private Byte status;
 
     /**
      * 创建时间
@@ -212,7 +215,7 @@ public class TbItem {
      *
      * @return status - 商品状态，1-正常，2-下架，3-删除
      */
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
@@ -221,7 +224,7 @@ public class TbItem {
      *
      * @param status 商品状态，1-正常，2-下架，3-删除
      */
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
