@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/itemCats")
+@CrossOrigin(origins = "*")
 public class TbItemCatController {
     @Autowired
     private TbItemCatService itemCatService;

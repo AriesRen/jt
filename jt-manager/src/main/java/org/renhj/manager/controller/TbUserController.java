@@ -14,13 +14,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class TbUserController {
     @Autowired
     private TbUserService userService;
 
     @GetMapping
-    public Result users(@RequestParam(value = "pageCurrent", defaultValue = "1") Integer pageCurrent,
-                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+    public Result users(@RequestParam(value = "current", defaultValue = "1") Integer pageCurrent,
+                        @RequestParam(value = "size", defaultValue = "5") Integer pageSize,
                         @RequestParam(value = "username", defaultValue = "") String username) {
         return Result.ok(userService.findUsersByUsernameWithPage(username, pageCurrent, pageSize));
     }

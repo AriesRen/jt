@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/item")
+@CrossOrigin(origins = "*")
 public class TbItemController {
     @Autowired
     private TbItemService itemService;
 
     // 分页获取商品信息
     @GetMapping
-    public Result items(@RequestParam("pageCurrent")Integer pageCurrent,
-                        @RequestParam("pageSize")Integer pageSize){
+    public Result items(@RequestParam(value = "pageCurrent", defaultValue = "1")Integer pageCurrent,
+                        @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize){
         return Result.ok(itemService.findItemWithPage(pageCurrent, pageSize));
     }
     // 添加一个商品信息
