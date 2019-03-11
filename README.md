@@ -17,7 +17,7 @@
 ### 依赖关系
 
 ### 架构
-
+本项目采用前后端分离的架构及开发模式
 前端采用vue进行开发，框架使用vue-template   
 后端采用java进行开发，框架使用spring、spring-mvc  
 基础服务层采用docker进行搭建
